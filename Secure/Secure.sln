@@ -5,11 +5,9 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Secure", "Secure\Secure.csproj", "{063CDD35-9DBE-4523-83EB-79D91BFF9ED7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureLogic", "SecureLogic\SecureLogic.csproj", "{A95521AD-1021-41B8-85C8-62972A78C4B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecureLogic", "SecureLogic\SecureLogic.csproj", "{A95521AD-1021-41B8-85C8-62972A78C4B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecuretListImplement", "SecuretListImplement\SecuretListImplement.csproj", "{0E001866-9638-427F-B7B6-DFCD907FBF14}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureShopFileImplement", "SecureShopFileImplement\SecureShopFileImplement.csproj", "{841FE8D7-8CCC-46E2-ACF6-66933ACCB549}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecuretListImplement", "SecuretListImplement\SecuretListImplement.csproj", "{0E001866-9638-427F-B7B6-DFCD907FBF14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{0E001866-9638-427F-B7B6-DFCD907FBF14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E001866-9638-427F-B7B6-DFCD907FBF14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E001866-9638-427F-B7B6-DFCD907FBF14}.Release|Any CPU.Build.0 = Release|Any CPU
-		{841FE8D7-8CCC-46E2-ACF6-66933ACCB549}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{841FE8D7-8CCC-46E2-ACF6-66933ACCB549}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{841FE8D7-8CCC-46E2-ACF6-66933ACCB549}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{841FE8D7-8CCC-46E2-ACF6-66933ACCB549}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

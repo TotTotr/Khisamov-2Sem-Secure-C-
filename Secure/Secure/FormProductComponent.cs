@@ -39,29 +39,26 @@
             // labelComponents
             // 
             this.labelComponents.AutoSize = true;
-            this.labelComponents.Location = new System.Drawing.Point(16, 39);
-            this.labelComponents.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelComponents.Location = new System.Drawing.Point(12, 32);
             this.labelComponents.Name = "labelComponents";
-            this.labelComponents.Size = new System.Drawing.Size(81, 17);
+            this.labelComponents.Size = new System.Drawing.Size(63, 13);
             this.labelComponents.TabIndex = 0;
             this.labelComponents.Text = "Компонент";
             // 
             // labelCount
             // 
             this.labelCount.AutoSize = true;
-            this.labelCount.Location = new System.Drawing.Point(16, 84);
-            this.labelCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelCount.Location = new System.Drawing.Point(12, 68);
             this.labelCount.Name = "labelCount";
-            this.labelCount.Size = new System.Drawing.Size(86, 17);
+            this.labelCount.Size = new System.Drawing.Size(66, 13);
             this.labelCount.TabIndex = 1;
             this.labelCount.Text = "Количество";
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(275, 127);
-            this.buttonSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonSave.Location = new System.Drawing.Point(206, 103);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(123, 27);
+            this.buttonSave.Size = new System.Drawing.Size(92, 22);
             this.buttonSave.TabIndex = 2;
             this.buttonSave.Text = "Сохранить";
             this.buttonSave.UseVisualStyleBackColor = true;
@@ -69,10 +66,9 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(431, 127);
-            this.buttonCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonCancel.Location = new System.Drawing.Point(323, 103);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(120, 27);
+            this.buttonCancel.Size = new System.Drawing.Size(90, 22);
             this.buttonCancel.TabIndex = 3;
             this.buttonCancel.Text = "Отмена";
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -80,33 +76,30 @@
             // 
             // textBoxCount
             // 
-            this.textBoxCount.Location = new System.Drawing.Point(112, 80);
-            this.textBoxCount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxCount.Location = new System.Drawing.Point(84, 65);
             this.textBoxCount.Name = "textBoxCount";
-            this.textBoxCount.Size = new System.Drawing.Size(437, 22);
+            this.textBoxCount.Size = new System.Drawing.Size(329, 20);
             this.textBoxCount.TabIndex = 4;
             // 
             // comboBoxComponent
             // 
             this.comboBoxComponent.FormattingEnabled = true;
-            this.comboBoxComponent.Location = new System.Drawing.Point(112, 36);
-            this.comboBoxComponent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxComponent.Location = new System.Drawing.Point(81, 32);
             this.comboBoxComponent.Name = "comboBoxComponent";
-            this.comboBoxComponent.Size = new System.Drawing.Size(437, 24);
+            this.comboBoxComponent.Size = new System.Drawing.Size(329, 21);
             this.comboBoxComponent.TabIndex = 5;
             // 
             // FormProductComponent
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(567, 182);
+            this.ClientSize = new System.Drawing.Size(425, 148);
             this.Controls.Add(this.comboBoxComponent);
             this.Controls.Add(this.textBoxCount);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.labelCount);
             this.Controls.Add(this.labelComponents);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormProductComponent";
             this.Text = "Компонент изделия";
             this.ResumeLayout(false);

@@ -5,6 +5,7 @@ using SecureShopFileImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 namespace SecureShopFileImplement.Implements
 {
     public class ComponentLogic : IComponentLogic
