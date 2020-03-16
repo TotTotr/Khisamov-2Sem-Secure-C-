@@ -136,6 +136,10 @@
       <Project>{a95521ad-1021-41b8-85c8-62972a78c4b6}</Project>
       <Name>SecureLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SecureShopFileImplement\SecureShopFileImplement.csproj">
+      <Project>{24d298f8-9610-4833-b662-7e3f2d3fc62f}</Project>
+      <Name>SecureShopFileImplement</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SecuretListImplement\SecuretListImplement.csproj">
       <Project>{0e001866-9638-427f-b7b6-dfcd907fbf14}</Project>
       <Name>SecuretListImplement</Name>
