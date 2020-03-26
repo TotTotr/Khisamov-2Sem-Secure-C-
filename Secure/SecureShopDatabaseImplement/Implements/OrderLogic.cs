@@ -60,11 +60,12 @@ namespace SecureShopDatabaseImplement.Implements
             using (var context = new SecureShopDatabase())
             {
                 return context.Orders
+                   // .Include(rec => rec.Product)
                 .Where(rec => model == null || rec.Id == model.Id)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
-                    //ProductName = context.Products.FirstOrDefault((r) => r.Id == rec.ProductId).ProductName,
+                    ProductName = context.Products.FirstOrDefault((r) => r.Id == rec.ProductId).ProductName,
                     Count = rec.Count,
                     Sum = rec.Sum,
                     Status = rec.Status,
