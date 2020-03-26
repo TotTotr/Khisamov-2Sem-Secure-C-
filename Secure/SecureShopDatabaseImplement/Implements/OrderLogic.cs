@@ -64,7 +64,7 @@ namespace SecureShopDatabaseImplement.Implements
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
-                    ProductName = context.Products.FirstOrDefault((r) => r.Id == rec.ProductId).ProductName,
+                    //ProductName = context.Products.FirstOrDefault((r) => r.Id == rec.ProductId).ProductName,
                     Count = rec.Count,
                     Sum = rec.Sum,
                     Status = rec.Status,
