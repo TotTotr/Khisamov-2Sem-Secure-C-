@@ -6,13 +6,13 @@ using System.Text;
 namespace SecureLogic.ViewModels
 {
     /// Изделие, изготавливаемое в магазине   
-    public class ProductViewModel
+    public class KomlectViewModel
     {
         public int Id { get; set; }
         [DisplayName("Название изделия")]
-        public string ProductName { get; set; }
+        public string KomlectName { get; set; }
         [DisplayName("Цена")]
         public decimal Price { get; set; }
-        public Dictionary<int, (string, int)> ProductComponents { get; set; }
+        public Dictionary<int, (string, int)> KomlectComponents { get; set; }
     }
 }

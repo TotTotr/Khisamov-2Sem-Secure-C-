@@ -10,8 +10,8 @@ namespace Secure
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
-        private readonly IProductLogic logic;
-        public FormKomlects(IProductLogic logic)
+        private readonly IKomlectLogic logic;
+        public FormKomlects(IKomlectLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
@@ -72,7 +72,7 @@ DataGridViewAutoSizeColumnMode.Fill;
                     int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        logic.Delete(new ProductConcreteBindingModel { Id = id });
+                        logic.Delete(new KomlectKomlectBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {

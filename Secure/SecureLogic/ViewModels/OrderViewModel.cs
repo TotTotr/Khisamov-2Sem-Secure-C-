@@ -11,9 +11,9 @@ namespace SecureLogic.ViewModels
     {
         public int Id { get; set; }
 
-        public int ProductId { get; set; }
+        public int KomlectId { get; set; }
 
-        [DisplayName("Изделие")] public string ProductName { get; set; }
+        [DisplayName("Изделие")] public string KomlectName { get; set; }
 
         [DisplayName("Количество")] public int Count { get; set; }
 

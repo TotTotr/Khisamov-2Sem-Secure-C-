@@ -32,7 +32,7 @@ namespace Secure
                HierarchicalLifetimeManager());
                 currentContainer.RegisterType<IOrderLogic, OrderLogic>(new
                HierarchicalLifetimeManager());
-                currentContainer.RegisterType<IProductLogic, ProductLogic>(new
+                currentContainer.RegisterType<IKomlectLogic, KomlectLogic>(new
                HierarchicalLifetimeManager());
                 currentContainer.RegisterType<MainLogic>(new HierarchicalLifetimeManager());
                 return currentContainer;

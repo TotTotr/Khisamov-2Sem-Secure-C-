@@ -9,7 +9,7 @@ namespace SecureLogic.BindingModels
     public class OrderBindingModel
     {
         public int? Id { get; set; }
-        public int ProductId { get; set; }
+        public int KomlectId { get; set; }
 
         public int Count { get; set; }
 
