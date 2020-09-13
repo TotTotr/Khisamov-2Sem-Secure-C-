@@ -19,6 +19,7 @@ namespace SecureLogic.BusinessLogic
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
                 KomlectId = model.KomlectId,
+                ClientId = model.ClientId,
                 Count = model.Count,
                 Sum = model.Sum,
                 DateCreate = DateTime.Now,
@@ -43,6 +44,7 @@ namespace SecureLogic.BusinessLogic
             {
                 Id = order.Id,
                 KomlectId = order.KomlectId,
+                ClientId = order.ClientId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
@@ -68,6 +70,7 @@ namespace SecureLogic.BusinessLogic
             {
                 Id = order.Id,
                 KomlectId = order.KomlectId,
+                ClientId = order.ClientId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
@@ -93,6 +96,7 @@ namespace SecureLogic.BusinessLogic
             {
                 Id = order.Id,
                 KomlectId = order.KomlectId,
+                ClientId = order.ClientId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,

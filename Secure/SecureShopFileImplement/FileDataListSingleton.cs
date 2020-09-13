@@ -75,7 +75,7 @@ namespace SecureShopFileImplement
                             Id = Convert.ToInt32(elem.Attribute("Id").Value),
                             KomlectId = Convert.ToInt32(elem.Element("KomlectId").Value),
                             Count = Convert.ToInt32(elem.Element("Count").Value),
-                            Sum = Convert.ToDecimal(elem.Element("Sum").Value),
+                            Sum = Convert.ToInt32(elem.Element("Sum").Value),
                             Status = (OrderStatus)Enum.Parse(typeof(OrderStatus),
                        elem.Element("Status").Value),
                             DateCreate =
@@ -101,7 +101,7 @@ namespace SecureShopFileImplement
                         {
                             Id = Convert.ToInt32(elem.Attribute("Id").Value),
                             KomlectName = elem.Element("KomlectName").Value,
-                            Price = Convert.ToDecimal(elem.Element("Price").Value)
+                            Price = Convert.ToInt32(elem.Element("Price").Value)
                         });
                     }
                 }

@@ -15,7 +15,7 @@ namespace SecureShopDatabaseImplement.Models
         [Required]
         public string KomlectName { get; set; }
         [Required]
-        public decimal Price { get; set; }
+        public int Price { get; set; }
 
         public virtual List<Order> Orders { get; set; }
         public virtual List<KomlectComponent> KomlectComponents { get; set; }

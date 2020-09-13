@@ -11,7 +11,7 @@ namespace SecuretListImplement.Models
     {
         public int Id { get; set; }
         public string KomlectName { get; set; }
-        public decimal Price { get; set; }
+        public int Price { get; set; }
     }
 
 }
