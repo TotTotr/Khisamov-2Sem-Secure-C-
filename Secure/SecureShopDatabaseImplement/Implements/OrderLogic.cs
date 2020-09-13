@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using SecureShopDatabaseImplement.Models;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace SecureShopDatabaseImplement.Implements
 {
@@ -60,12 +61,12 @@ namespace SecureShopDatabaseImplement.Implements
             using (var context = new SecureShopDatabase())
             {
                 return context.Orders
-      
+                .Include(x => x.Product)
                 .Where(rec => model == null || rec.Id == model.Id)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
-                    ProductName = context.Products.FirstOrDefault((r) => r.Id == rec.ProductId).ProductName,
+                    ProductName = rec.Product.ProductName,
                     Count = rec.Count,
                     Sum = rec.Sum,
                     Status = rec.Status,
