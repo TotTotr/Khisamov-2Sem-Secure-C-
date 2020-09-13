@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GiftShopRestApi.Controllers
+namespace SecureShopRestApi.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
