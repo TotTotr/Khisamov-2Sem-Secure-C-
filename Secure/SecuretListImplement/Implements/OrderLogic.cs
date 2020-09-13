@@ -4,6 +4,7 @@ using SecureLogic.Interfaces;
 using SecureLogic.ViewModels;
 using SecuretListImplement.Models;
 using System.Collections.Generic;
+using SecureLogic.Enums;
 
 namespace SecuretListImplement.Implements
 {
@@ -63,6 +64,7 @@ namespace SecuretListImplement.Implements
         {
             order.KomlectId = model.KomlectId;
             order.Count = model.Count;
+            order.ClientId = (int)model.ClientId;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
             order.Sum = model.Sum;
@@ -77,7 +79,11 @@ namespace SecuretListImplement.Implements
 
             foreach (var order in source.Orders)
             {
-                if (model != null)
+                if (model != null && order.Id == model.Id
+                    || model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo
+                    || model.ClientId.HasValue && order.ClientId == model.ClientId
+                    || model.FreeOrders.HasValue && model.FreeOrders.Value
+                    || model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId && order.Status == OrderStatus.Выполняется)
                 {
                     if (order.Id == model.Id)
                     {
@@ -114,6 +120,7 @@ namespace SecuretListImplement.Implements
             return new OrderViewModel
             {
                 Id = order.Id,
+                ClientId = order.ClientId,
                 KomlectId = order.KomlectId,
                 KomlectName = KomlectName,
                 Count = order.Count,
