@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
 
 namespace SecureShopDatabaseImplement.Models
 {
@@ -15,7 +15,6 @@ namespace SecureShopDatabaseImplement.Models
         [Required]
         public string ComponentName { get; set; }
         [ForeignKey("ComponentId")]
-        public virtual List<ProductComponent> ProductComponents { get; set; }
+        public virtual List<KomlectComponent> KomlectComponents { get; set; }
     }
-
 }

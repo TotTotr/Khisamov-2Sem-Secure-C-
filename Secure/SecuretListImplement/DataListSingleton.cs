@@ -10,14 +10,14 @@ namespace SecuretListImplement
         private static DataListSingleton instance;
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
-        public List<Product> Products { get; set; }
-        public List<ProductComponent> ProductComponents { get; set; }
+        public List<Komlect> Komlects { get; set; }
+        public List<KomlectComponent> KomlectComponents { get; set; }
         private DataListSingleton()
         {
             Components = new List<Component>();
             Orders = new List<Order>();
-            Products = new List<Product>();
-            ProductComponents = new List<ProductComponent>();
+            Komlects = new List<Komlect>();
+            KomlectComponents = new List<KomlectComponent>();
         }
         public static DataListSingleton GetInstance()
         {

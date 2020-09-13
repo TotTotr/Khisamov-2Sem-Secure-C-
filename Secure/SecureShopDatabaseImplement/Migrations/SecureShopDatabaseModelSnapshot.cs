@@ -15,7 +15,7 @@ namespace SecureShopDatabaseImplement.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.3")
+                .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -35,6 +35,50 @@ namespace SecureShopDatabaseImplement.Migrations
                     b.ToTable("Components");
                 });
 
+            modelBuilder.Entity("SecureShopDatabaseImplement.Models.Komlect", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("KomlectName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Komlects");
+                });
+
+            modelBuilder.Entity("SecureShopDatabaseImplement.Models.KomlectComponent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ComponentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("KomlectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComponentId");
+
+                    b.HasIndex("KomlectId");
+
+                    b.ToTable("KomlectComponents");
+                });
+
             modelBuilder.Entity("SecureShopDatabaseImplement.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -51,7 +95,7 @@ namespace SecureShopDatabaseImplement.Migrations
                     b.Property<DateTime?>("DateImplement")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("KomlectId")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
@@ -62,75 +106,31 @@ namespace SecureShopDatabaseImplement.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("KomlectId");
 
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("SecureShopDatabaseImplement.Models.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("ProductName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("SecureShopDatabaseImplement.Models.ProductComponent", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ComponentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ComponentId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductComponents");
-                });
-
-            modelBuilder.Entity("SecureShopDatabaseImplement.Models.Order", b =>
-                {
-                    b.HasOne("SecureShopDatabaseImplement.Models.Product", "Product")
-                        .WithMany("Orders")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SecureShopDatabaseImplement.Models.ProductComponent", b =>
+            modelBuilder.Entity("SecureShopDatabaseImplement.Models.KomlectComponent", b =>
                 {
                     b.HasOne("SecureShopDatabaseImplement.Models.Component", "Component")
-                        .WithMany("ProductComponents")
+                        .WithMany("KomlectComponents")
                         .HasForeignKey("ComponentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SecureShopDatabaseImplement.Models.Product", "Product")
-                        .WithMany("ProductComponents")
-                        .HasForeignKey("ProductId")
+                    b.HasOne("SecureShopDatabaseImplement.Models.Komlect", "Komlect")
+                        .WithMany("KomlectComponents")
+                        .HasForeignKey("KomlectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SecureShopDatabaseImplement.Models.Order", b =>
+                {
+                    b.HasOne("SecureShopDatabaseImplement.Models.Komlect", "Komlect")
+                        .WithMany("Orders")
+                        .HasForeignKey("KomlectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

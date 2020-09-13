@@ -1,17 +1,18 @@
-﻿using System;
-using SecureLogic.BindingModels;
+﻿using SecureLogic.BindingModels;
 using SecureLogic.Interfaces;
 using SecureLogic.ViewModels;
-using System.Collections.Generic;
-using System.Text;
 using SecureShopDatabaseImplement.Models;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace SecureShopDatabaseImplement.Implements
 {
     public class OrderLogic : IOrderLogic
     {
+
         public void CreateOrUpdate(OrderBindingModel model)
         {
             using (var context = new SecureShopDatabase())
@@ -19,7 +20,8 @@ namespace SecureShopDatabaseImplement.Implements
                 Order element;
                 if (model.Id.HasValue)
                 {
-                    element = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+                    element = context.Orders.FirstOrDefault(rec => rec.Id ==
+                   model.Id);
                     if (element == null)
                     {
                         throw new Exception("Элемент не найден");
@@ -27,10 +29,10 @@ namespace SecureShopDatabaseImplement.Implements
                 }
                 else
                 {
-                    element = new Order { };
+                    element = new Order();
                     context.Orders.Add(element);
                 }
-                element.ProductId = model.ProductId == 0 ? element.ProductId : model.ProductId;
+                element.KomlectId = model.KomlectId == 0 ? element.KomlectId : model.KomlectId;
                 element.Count = model.Count;
                 element.Sum = model.Sum;
                 element.Status = model.Status;
@@ -39,12 +41,13 @@ namespace SecureShopDatabaseImplement.Implements
                 context.SaveChanges();
             }
         }
+
         public void Delete(OrderBindingModel model)
         {
             using (var context = new SecureShopDatabase())
             {
                 Order element = context.Orders.FirstOrDefault(rec => rec.Id ==
-                        model.Id);
+model.Id);
                 if (element != null)
                 {
                     context.Orders.Remove(element);
@@ -56,26 +59,27 @@ namespace SecureShopDatabaseImplement.Implements
                 }
             }
         }
+
+
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
             using (var context = new SecureShopDatabase())
             {
                 return context.Orders
-                .Include(x => x.Product)
+                .Include(x => x.Komlect)
                 .Where(rec => model == null || rec.Id == model.Id)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
-                    ProductName = rec.Product.ProductName,
+                    KomlectName = rec.Komlect.KomlectName,
                     Count = rec.Count,
                     Sum = rec.Sum,
                     Status = rec.Status,
                     DateCreate = rec.DateCreate,
                     DateImplement = rec.DateImplement
                 })
-            .ToList();
+               .ToList();
             }
         }
     }
 }
-

@@ -5,7 +5,7 @@ using SecureLogic.Enums;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SecureLogic.BusinessLogics
+namespace SecureLogic.BusinessLogic
 {
     public class MainLogic
     {
@@ -18,7 +18,7 @@ namespace SecureLogic.BusinessLogics
         {
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
-                ProductId = model.ProductId,
+                KomlectId = model.KomlectId,
                 Count = model.Count,
                 Sum = model.Sum,
                 DateCreate = DateTime.Now,
@@ -42,7 +42,7 @@ namespace SecureLogic.BusinessLogics
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
                 Id = order.Id,
-                ProductId = order.ProductId,
+                KomlectId = order.KomlectId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
@@ -67,7 +67,7 @@ namespace SecureLogic.BusinessLogics
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
                 Id = order.Id,
-                ProductId = order.ProductId,
+                KomlectId = order.KomlectId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
@@ -92,7 +92,7 @@ namespace SecureLogic.BusinessLogics
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
                 Id = order.Id,
-                ProductId = order.ProductId,
+                KomlectId = order.KomlectId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,

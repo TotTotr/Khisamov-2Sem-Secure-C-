@@ -1,10 +1,12 @@
-﻿using SecureLogic.Interfaces;
-using SecureLogic.BindingModels;
+﻿using SecureLogic.BindingModels;
+using SecureLogic.Interfaces;
 using SecureLogic.ViewModels;
+using SecureShopDatabaseImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using SecureShopDatabaseImplement.Models;
+using System.Text;
+
 
 namespace SecureShopDatabaseImplement.Implements
 {

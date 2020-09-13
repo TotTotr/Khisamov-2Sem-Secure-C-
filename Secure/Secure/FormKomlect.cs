@@ -15,29 +15,29 @@ namespace Secure
         [Dependency]
         public new IUnityContainer Container { get; set; }
         public int Id { set { id = value; } }
-        private readonly IProductLogic logic;
+        private readonly IKomlectLogic logic;
         private int? id;
-        private Dictionary<int, (string, int)> productComponents;
-        public FormKomlect(IProductLogic service)
+        private Dictionary<int, (string, int)> KomlectComponents;
+        public FormKomlect(IKomlectLogic service)
         {
             InitializeComponent();
             this.logic = service;
         }
-        private void FormProduct_Load(object sender, EventArgs e)
+        private void FormKomlect_Load(object sender, EventArgs e)
         {
             if (id.HasValue)
             {
                 try
                 {
-                    ProductViewModel view = logic.Read(new ProductConcreteBindingModel
+                    KomlectViewModel view = logic.Read(new KomlectConcreteBindingModel
                     {
                         Id = id.Value
                     })?[0];
                     if (view != null)
                     {
-                        textBoxName.Text = view.ProductName;
+                        textBoxName.Text = view.KomlectName;
                         textBoxPrice.Text = view.Price.ToString();
-                        productComponents = view.ProductComponents;
+                        KomlectComponents = view.KomlectComponents;
                         LoadData();
                     }
                 }
@@ -49,17 +49,17 @@ namespace Secure
             }
             else
             {
-                productComponents = new Dictionary<int, (string, int)>();
+                KomlectComponents = new Dictionary<int, (string, int)>();
             }
         }
         private void LoadData()
         {
             try
             {
-                if (productComponents != null)
+                if (KomlectComponents != null)
                 {
                     dataGridView.Rows.Clear();
-                    foreach (var pc in productComponents)
+                    foreach (var pc in KomlectComponents)
                     {
                         dataGridView.Rows.Add(new object[] { pc.Key, pc.Value.Item1, pc.Value.Item2 });
                     }
@@ -85,7 +85,7 @@ namespace Secure
                MessageBoxIcon.Error);
                 return;
             }
-            if (productComponents == null || productComponents.Count == 0)
+            if (KomlectComponents == null || KomlectComponents.Count == 0)
             {
                 MessageBox.Show("Заполните компоненты", "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
@@ -93,12 +93,12 @@ namespace Secure
             }
             try
             {
-                logic.CreateOrUpdate(new ProductConcreteBindingModel
+                logic.CreateOrUpdate(new KomlectConcreteBindingModel
                 {
                     Id = id,
-                    ProductName = textBoxName.Text,
+                    KomlectName = textBoxName.Text,
                     Price = Convert.ToDecimal(textBoxPrice.Text),
-                    ProductComponents = productComponents
+                    KomlectComponents = KomlectComponents
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -133,7 +133,7 @@ namespace Secure
                     try
                     {
 
-                        productComponents.Remove(Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value));
+                        KomlectComponents.Remove(Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value));
                     }
                     catch (Exception ex)
                     {
@@ -149,13 +149,13 @@ namespace Secure
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = Container.Resolve<FormProductComponent>();
+                var form = Container.Resolve<FormKomlectComponent>();
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 form.Id = id;
-                form.Count = productComponents[id].Item2;
+                form.Count = KomlectComponents[id].Item2;
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    productComponents[form.Id] = (form.ComponentName, form.Count);
+                    KomlectComponents[form.Id] = (form.ComponentName, form.Count);
                     LoadData();
                 }
             }
@@ -163,16 +163,16 @@ namespace Secure
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormProductComponent>();
+            var form = Container.Resolve<FormKomlectComponent>();
             if (form.ShowDialog() == DialogResult.OK)
             {
-                if (productComponents.ContainsKey(form.Id))
+                if (KomlectComponents.ContainsKey(form.Id))
                 {
-                    productComponents[form.Id] = (form.ComponentName, form.Count);
+                    KomlectComponents[form.Id] = (form.ComponentName, form.Count);
                 }
                 else
                 {
-                    productComponents.Add(form.Id, (form.ComponentName, form.Count));
+                    KomlectComponents.Add(form.Id, (form.ComponentName, form.Count));
                 }
                 LoadData();
             }

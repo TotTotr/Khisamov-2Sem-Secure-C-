@@ -61,7 +61,7 @@ namespace SecuretListImplement.Implements
 
         private Order CreateModel(OrderBindingModel model, Order order)
         {
-            order.ProductId = model.ProductId;
+            order.KomlectId = model.KomlectId;
             order.Count = model.Count;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
@@ -96,17 +96,17 @@ namespace SecuretListImplement.Implements
 
         private OrderViewModel CreateViewModel(Order order)
         {
-            string productName = null;
+            string KomlectName = null;
 
-            foreach (var product in source.Products)
+            foreach (var Komlect in source.Komlects)
             {
-                if (product.Id == order.ProductId)
+                if (Komlect.Id == order.KomlectId)
                 {
-                    productName = product.ProductName;
+                    KomlectName = Komlect.KomlectName;
                 }
             }
 
-            if (productName == null)
+            if (KomlectName == null)
             {
                 throw new Exception("Продукт не найден");
             }
@@ -114,8 +114,8 @@ namespace SecuretListImplement.Implements
             return new OrderViewModel
             {
                 Id = order.Id,
-                ProductId = order.ProductId,
-                ProductName = productName,
+                KomlectId = order.KomlectId,
+                KomlectName = KomlectName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,
