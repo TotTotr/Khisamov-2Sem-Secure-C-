@@ -92,7 +92,7 @@
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
             // 
-            // FormProductsConcrete
+            // FormKomlectsConcrete
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -102,7 +102,7 @@
             this.Controls.Add(this.buttonUpd);
             this.Controls.Add(this.buttonDel);
             this.Controls.Add(this.buttonAdd);
-            this.Name = "FormProductsConcrete";
+            this.Name = "FormKomlectsConcrete";
             this.Text = "Изделия";
             this.Load += new System.EventHandler(this.FormComponents_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();

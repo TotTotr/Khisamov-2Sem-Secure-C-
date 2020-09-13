@@ -5,14 +5,14 @@ using System.Text;
 namespace SecureLogic.BindingModels
 {
     /// Изделие, изготавливаемое в магазине 
-    public class ProductConcreteBindingModel
+    public class KomlectConcreteBindingModel
     {
         public int? Id { get; set; }
 
-        public string ProductName { get; set; }
+        public string KomlectName { get; set; }
 
         public decimal Price { get; set; }
 
-        public Dictionary<int, (string, int)> ProductComponents { get; set; }
+        public Dictionary<int, (string, int)> KomlectComponents { get; set; }
     }
 }

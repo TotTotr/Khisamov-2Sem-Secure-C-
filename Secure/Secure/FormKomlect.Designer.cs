@@ -199,7 +199,7 @@ namespace Secure
             this.Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView.AllowUserToAddRows = false;
             // 
-            // FormProductConcrete
+            // FormKomlectConcrete
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -212,9 +212,9 @@ namespace Secure
             this.Controls.Add(this.labelSum);
             this.Controls.Add(this.labelName);
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "FormProductConcrete";
+            this.Name = "FormKomlectConcrete";
             this.Text = "Изделие";
-            this.Load += new System.EventHandler(this.FormProduct_Load);
+            this.Load += new System.EventHandler(this.FormKomlect_Load);
             this.groupBoxComponent.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
