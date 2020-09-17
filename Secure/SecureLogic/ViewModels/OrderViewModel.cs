@@ -1,4 +1,5 @@
-﻿using SecureLogic.Enums;
+﻿using SecureLogic.Attributes;
+using SecureLogic.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +9,7 @@ using System.Text;
 namespace SecureLogic.ViewModels
 {
     /// Заказ 
-    public class OrderViewModel
+    public class OrderViewModel : BaseViewModel
     {
         [DataMember]
         public int Id { get; set; }
@@ -20,29 +21,48 @@ namespace SecureLogic.ViewModels
         [DataMember]
         public int? ImplementerId { get; set; }
         [DataMember]
-        [DisplayName("Исполнитель")]
+        [Column(title: "Исполнитель", width: 100)]
         public string ImplementerFIO { get; set; }
 
         [DataMember]
-        [DisplayName("Клиент")]
+        [Column(title: "Клиент", width: 150)]
         public string ClientFIO { get; set; }
 
         [DataMember]
-        [DisplayName("Изделие")] public string KomlectName { get; set; }
+        [Column(title: "Изделие", width: 100)]
+        public string KomlectName { get; set; }
 
         [DataMember]
-        [DisplayName("Количество")] public int Count { get; set; }
+        [Column(title: "Количество", width: 100)]
+        public int Count { get; set; }
 
         [DataMember]
-        [DisplayName("Сумма")] public int Sum { get; set; }
+        [Column(title: "Сумма", width: 50)]
+        public int Sum { get; set; }
 
         [DataMember]
-        [DisplayName("Статус")] public OrderStatus Status { get; set; }
+        [Column(title: "Статус", width: 100)]
+        public OrderStatus Status { get; set; }
 
         [DataMember]
+
+        [Column(title: "Дата создания", width: 100)]
         [DisplayName("Дата создания")] public DateTime DateCreate { get; set; }
 
         [DataMember]
+        [Column(title: "Дата выполнения", width: 100)]
         [DisplayName("Дата выполнения")] public DateTime? DateImplement { get; set; }
+        public override List<string> Properties() => new List<string>
+        {
+            "ImplementerId",
+            "ClientFIO",
+            "GiftSetName",
+            "ImplementerFIO",
+            "Count",
+            "Sum",
+            "Status",
+            "DateCreate",
+            "DateImplement"
+        };
     }
 }

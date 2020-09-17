@@ -65,6 +65,28 @@ namespace SecureShopDatabaseImplement.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MessageInfoes",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    ClientId = table.Column<int>(nullable: true),
+                    SenderName = table.Column<string>(nullable: true),
+                    DateDelivery = table.Column<DateTime>(nullable: false),
+                    Subject = table.Column<string>(nullable: true),
+                    Body = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MessageInfoes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MessageInfoes_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "KomlectComponents",
                 columns: table => new
                 {
@@ -140,6 +162,11 @@ namespace SecureShopDatabaseImplement.Migrations
                 column: "KomlectId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MessageInfoes_ClientId",
+                table: "MessageInfoes",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_ClientId",
                 table: "Orders",
                 column: "ClientId");
@@ -159,6 +186,9 @@ namespace SecureShopDatabaseImplement.Migrations
         {
             migrationBuilder.DropTable(
                 name: "KomlectComponents");
+
+            migrationBuilder.DropTable(
+                name: "MessageInfoes");
 
             migrationBuilder.DropTable(
                 name: "Orders");
