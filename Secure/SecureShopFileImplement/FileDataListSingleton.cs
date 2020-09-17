@@ -19,12 +19,14 @@ namespace SecureShopFileImplement
             private readonly string ClientFileName = "Client.xml";
             private readonly string ImplementerFileName = "Implementer.xml";
             private readonly string KomlectComponentFileName = "KomlectComponent.xml";
+            private readonly string ClientFileName = "Client.xml";
             public List<Component> Components { get; set; }
             public List<Order> Orders { get; set; }
             public List<Komlect> Komlects { get; set; }
             public List<KomlectComponent> KomlectComponents { get; set; }
             public List<Client> Clients { get; set; }
             public List<Implementer> Implementers { get; set; }
+
         private FileDataListSingleton()
             {
                 Components = LoadComponents();
