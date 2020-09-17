@@ -38,6 +38,13 @@
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
+            // MessagesToolStripMenuItem
+            // 
+            this.MessagesToolStripMenuItem.Name = "MessagesToolStripMenuItem";
+            this.MessagesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.MessagesToolStripMenuItem.Text = "Сообщения";
+            this.MessagesToolStripMenuItem.Click += new System.EventHandler(this.MessagesToolStripMenuItem_Click);
+            // 
             // dataGridView
             // 
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -115,5 +122,6 @@
         private System.Windows.Forms.ToolStripMenuItem создатьЗаказToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem обновитьСписокToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem изменитьДанныеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MessagesToolStripMenuItem;
     }
 }

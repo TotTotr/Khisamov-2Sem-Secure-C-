@@ -18,5 +18,6 @@ namespace SecureShopDatabaseImplement.Models
         [Required]
         public string Email { get; set; }
         public List<Order> Orders { get; set; }
+        public List<MessageInfo> MessageInfoes { get; set; }
     }
 }
