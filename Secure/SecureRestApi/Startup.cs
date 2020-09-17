@@ -28,6 +28,7 @@ namespace SecureRestApi
             services.AddTransient<IClientLogic, ClientLogic>();
             services.AddTransient<IOrderLogic, OrderLogic>();
             services.AddTransient<IKomlectLogic, KomlectLogic>();
+            services.AddTransient<IMessageInfoLogic, MessageInfoLogic>();
             services.AddTransient<IImplementerLogic, ImplementerLogic>();
             services.AddTransient<MainLogic>();
             services.AddControllers();

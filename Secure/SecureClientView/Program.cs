@@ -15,7 +15,7 @@ namespace SecureClientView
         static void Main()
         {
             ClientApi.Connect();
-
+            Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

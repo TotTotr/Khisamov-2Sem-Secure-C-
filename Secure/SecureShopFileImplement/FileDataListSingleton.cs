@@ -19,13 +19,15 @@ namespace SecureShopFileImplement
             private readonly string ClientFileName = "Client.xml";
             private readonly string ImplementerFileName = "Implementer.xml";
             private readonly string KomlectComponentFileName = "KomlectComponent.xml";
-            public List<Component> Components { get; set; }
+            private readonly string MessageInfoFileName = "MessageInfo.xml";
+        public List<Component> Components { get; set; }
             public List<Order> Orders { get; set; }
             public List<Komlect> Komlects { get; set; }
             public List<KomlectComponent> KomlectComponents { get; set; }
             public List<Client> Clients { get; set; }
             public List<Implementer> Implementers { get; set; }
-
+            public List<MessageInfo> MessageInfoes { get; set; }
+        }
         private FileDataListSingleton()
             {
                 Components = LoadComponents();
@@ -34,6 +36,7 @@ namespace SecureShopFileImplement
                 KomlectComponents = LoadKomlectComponents();
                 Clients = LoadClients();
                 Implementers = LoadImplementers();
+                MessageInfoes = LoadMessageInfoes();
         }
             public static FileDataListSingleton GetInstance()
             {
@@ -51,7 +54,9 @@ namespace SecureShopFileImplement
                 SaveKomlectComponents();
                 SaveClients();
                 SaveImplementers();
-            }
+                SaveMessageInfoes();
+        }
+            
             private List<Component> LoadComponents()
             {
                 var list = new List<Component>();
@@ -99,7 +104,32 @@ namespace SecureShopFileImplement
                 }
                 return list;
             }
-            private List<Komlect> LoadKomlects()
+        private List<MessageInfo> LoadMessageInfoes()
+        {
+            var list = new List<MessageInfo>();
+
+            if (File.Exists(MessageInfoFileName))
+            {
+                XDocument xDocument = XDocument.Load(MessageInfoFileName);
+                var xElements = xDocument.Root.Elements("MessageInfo").ToList();
+
+                foreach (var elem in xElements)
+                {
+                    list.Add(new MessageInfo
+                    {
+                        Id = elem.Attribute("Id").Value,
+                        ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
+                        SenderName = elem.Element("SenderName").Value,
+                        DateDelivery = Convert.ToDateTime(elem.Element("DateDelivery").Value),
+                        Subject = elem.Element("Subject").Value,
+                        Body = elem.Element("Body").Value
+                    });
+                }
+            }
+
+            return list;
+        }
+        private List<Komlect> LoadKomlects()
             {
                 var list = new List<Komlect>();
                 if (File.Exists(KomlectFileName))
@@ -285,6 +315,27 @@ namespace SecureShopFileImplement
 
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(ImplementerFileName);
+            }
+        }
+        private void SaveMessageInfoes()
+        {
+            if (MessageInfoes != null)
+            {
+                var xElement = new XElement("MessageInfoes");
+
+                foreach (var messageInfo in MessageInfoes)
+                {
+                    xElement.Add(new XElement("MessageInfo",
+                    new XAttribute("Id", messageInfo.Id),
+                    new XElement("ClientId", messageInfo.ClientId),
+                    new XElement("SenderName", messageInfo.SenderName),
+                    new XElement("DateDelivery", messageInfo.DateDelivery),
+                    new XElement("Subject", messageInfo.Subject),
+                    new XElement("Body", messageInfo.Body)));
+                }
+
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(MessageInfoFileName);
             }
         }
     }
