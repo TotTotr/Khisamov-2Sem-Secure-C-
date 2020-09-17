@@ -50,6 +50,8 @@ namespace SecureShopFileImplement
                 SaveOrders();
                 SaveKomlects();
                 SaveKomlectComponents();
+                SaveClients();
+                SaveImplementers();
             }
             private List<Component> LoadComponents()
             {
