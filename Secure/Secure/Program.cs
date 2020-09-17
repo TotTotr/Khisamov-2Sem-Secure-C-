@@ -53,6 +53,8 @@ namespace Secure
         {
             {
                 var currentContainer = new UnityContainer();
+                currentContainer.RegisterType<IClientLogic, ClientLogic>(new
+        HierarchicalLifetimeManager());
                 currentContainer.RegisterType<IComponentLogic, ComponentLogic>(new
                HierarchicalLifetimeManager());
                 currentContainer.RegisterType<IOrderLogic, OrderLogic>(new
