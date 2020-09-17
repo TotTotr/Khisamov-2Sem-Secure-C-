@@ -27,7 +27,7 @@ namespace SecureShopFileImplement
             public List<Client> Clients { get; set; }
             public List<Implementer> Implementers { get; set; }
             public List<MessageInfo> MessageInfoes { get; set; }
-        }
+        
         private FileDataListSingleton()
             {
                 Components = LoadComponents();
