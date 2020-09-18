@@ -1,6 +1,5 @@
-﻿//using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
 
 namespace SecureShopDatabaseImplement.Migrations
 {
