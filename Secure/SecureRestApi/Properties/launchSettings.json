@@ -1,28 +1,16 @@
-﻿{
-  "$schema": "http://json.schemastore.org/launchsettings.json",
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:54726",
-      "sslPort": 44389
+      "applicationUrl": "http://localhost:51973/",
+      "sslPort": 0
     }
   },
-    "profiles": {
-        "IIS Express": {
-            "commandName": "IISExpress",
-            "launchBrowser": true,
-            "launchUrl": "Secure",
-            "environmentVariables": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            }
-        },
-        "SecureRestApi": {
-            "commandName": "Project",
-            "launchBrowser": true,
-            "ASPNETCORE_ENVIRONMENT": "Development"
-        },
-        "applicationUrl": "http://localhost:54726"
+  "profiles": {
+    "Запуск": {
+      "commandName": "IISExpress",
+      "ErrorString": "Additional text encountered after finished reading JSON content: }. Path '', line 28, position 0."
     }
   }
 }

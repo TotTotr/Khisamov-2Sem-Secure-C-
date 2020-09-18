@@ -10,8 +10,8 @@ using SecureShopDatabaseImplement;
 namespace SecureShopDatabaseImplement.Migrations
 {
     [DbContext(typeof(SecureShopDatabase))]
-    [Migration("20200913152225_R1")]
-    partial class R1
+    [Migration("20200918060325_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

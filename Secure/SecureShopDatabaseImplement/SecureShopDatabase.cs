@@ -13,7 +13,7 @@ namespace SecureShopDatabaseImplement
         {
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-U4KP9KP\SQLEXPRESS;Initial Catalog=SecureShopDatabase;Integrated Security=True;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"Data Source=LAPTOP-11G4UIRG\SQLEXPRESS;Initial Catalog=SecureShopDatabase;Integrated Security=True;MultipleActiveResultSets=True;");
             }
             base.OnConfiguring(optionsBuilder);
         }
