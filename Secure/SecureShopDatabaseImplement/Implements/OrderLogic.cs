@@ -66,8 +66,10 @@ model.Id);
             using (var context = new SecureShopDatabase())
             {
                 return context.Orders
+                    .Where(rec => model == null
+                    || (rec.Id == model.Id && model.Id.HasValue)
+                    || (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
                 .Include(x => x.Komlect)
-                .Where(rec => model == null || rec.Id == model.Id)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
