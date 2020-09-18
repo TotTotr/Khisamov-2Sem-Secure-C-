@@ -7,24 +7,24 @@ using System.Collections.Generic;
 using System.Linq;
 namespace SecureShopFileImplement.Implements
 {
-    public class ProductLogic : IProductLogic
+    public class KomlectLogic : IKomlectLogic
     {
         private readonly FileDataListSingleton source;
-        public ProductLogic()
+        public KomlectLogic()
         {
             source = FileDataListSingleton.GetInstance();
         }
-        public void CreateOrUpdate(ProductConcreteBindingModel model)
+        public void CreateOrUpdate(KomlectConcreteBindingModel model)
         {
-            Product element = source.Products.FirstOrDefault(rec => rec.ProductName ==
-           model.ProductName && rec.Id != model.Id);
+            Komlect element = source.Komlects.FirstOrDefault(rec => rec.KomlectName ==
+           model.KomlectName && rec.Id != model.Id);
             if (element != null)
             {
                 throw new Exception("Уже есть изделие с таким названием");
             }
             if (model.Id.HasValue)
             {
-                element = source.Products.FirstOrDefault(rec => rec.Id == model.Id);
+                element = source.Komlects.FirstOrDefault(rec => rec.Id == model.Id);
                 if (element == null)
                 {
                     throw new Exception("Элемент не найден");
@@ -32,64 +32,64 @@ namespace SecureShopFileImplement.Implements
             }
             else
             {
-                int maxId = source.Products.Count > 0 ? source.Components.Max(rec =>
+                int maxId = source.Komlects.Count > 0 ? source.Components.Max(rec =>
                rec.Id) : 0;
-                element = new Product { Id = maxId + 1 };
-                source.Products.Add(element);
+                element = new Komlect { Id = maxId + 1 };
+                source.Komlects.Add(element);
             }
-            element.ProductName = model.ProductName;
+            element.KomlectName = model.KomlectName;
             element.Price = model.Price;
             // удалили те, которых нет в модели
-            source.ProductComponents.RemoveAll(rec => rec.ProductId == model.Id &&
-           !model.ProductComponents.ContainsKey(rec.ComponentId));
+            source.KomlectComponents.RemoveAll(rec => rec.KomlectId == model.Id &&
+           !model.KomlectComponents.ContainsKey(rec.ComponentId));
             // обновили количество у существующих записей
-            var updateComponents = source.ProductComponents.Where(rec => rec.ProductId ==
-           model.Id && model.ProductComponents.ContainsKey(rec.ComponentId));
+            var updateComponents = source.KomlectComponents.Where(rec => rec.KomlectId ==
+           model.Id && model.KomlectComponents.ContainsKey(rec.ComponentId));
             foreach (var updateComponent in updateComponents)
             {
                 updateComponent.Count =
-               model.ProductComponents[updateComponent.ComponentId].Item2;
-                model.ProductComponents.Remove(updateComponent.ComponentId);
+               model.KomlectComponents[updateComponent.ComponentId].Item2;
+                model.KomlectComponents.Remove(updateComponent.ComponentId);
             }
             // добавили новые
-            int maxPCId = source.ProductComponents.Count > 0 ?
-           source.ProductComponents.Max(rec => rec.Id) : 0;
-            foreach (var pc in model.ProductComponents)
+            int maxPCId = source.KomlectComponents.Count > 0 ?
+           source.KomlectComponents.Max(rec => rec.Id) : 0;
+            foreach (var pc in model.KomlectComponents)
             {
-                source.ProductComponents.Add(new ProductComponent
+                source.KomlectComponents.Add(new KomlectComponent
                 {
                     Id = ++maxPCId,
-                    ProductId = element.Id,
+                    KomlectId = element.Id,
                     ComponentId = pc.Key,
                     Count = pc.Value.Item2
                 });
             }
         }
-        public void Delete(ProductConcreteBindingModel model)
+        public void Delete(KomlectConcreteBindingModel model)
         {
             // удаяем записи по компонентам при удалении изделия
-            source.ProductComponents.RemoveAll(rec => rec.ProductId == model.Id);
-            Product element = source.Products.FirstOrDefault(rec => rec.Id == model.Id);
+            source.KomlectComponents.RemoveAll(rec => rec.KomlectId == model.Id);
+            Komlect element = source.Komlects.FirstOrDefault(rec => rec.Id == model.Id);
             if (element != null)
             {
-                source.Products.Remove(element);
+                source.Komlects.Remove(element);
             }
             else
             {
                 throw new Exception("Элемент не найден");
             }
         }
-        public List<ProductViewModel> Read(ProductConcreteBindingModel model)
+        public List<KomlectViewModel> Read(KomlectConcreteBindingModel model)
         {
-            return source.Products
+            return source.Komlects
             .Where(rec => model == null || rec.Id == model.Id)
-            .Select(rec => new ProductViewModel
+            .Select(rec => new KomlectViewModel
             {
                 Id = rec.Id,
-                ProductName = rec.ProductName,
+                KomlectName = rec.KomlectName,
                 Price = rec.Price,
-                ProductComponents = source.ProductComponents
-            .Where(recPC => recPC.ProductId == rec.Id)
+                KomlectComponents = source.KomlectComponents
+            .Where(recPC => recPC.KomlectId == rec.Id)
            .ToDictionary(recPC => recPC.ComponentId, recPC =>
             (source.Components.FirstOrDefault(recC => recC.Id ==
            recPC.ComponentId)?.ComponentName, recPC.Count))

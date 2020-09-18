@@ -8,7 +8,7 @@ using Unity;
 
 namespace Secure
 {
-    public partial class FormProductComponent : Form
+    public partial class FormKomlectComponent : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
@@ -27,7 +27,7 @@ namespace Secure
             }
         }
 
-        public FormProductComponent(IComponentLogic logic)
+        public FormKomlectComponent(IComponentLogic logic)
         {
             InitializeComponent();
             List<ComponentViewModel> list = logic.Read(null);

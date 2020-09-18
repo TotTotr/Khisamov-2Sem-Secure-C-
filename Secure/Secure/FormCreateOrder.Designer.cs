@@ -28,25 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBoxProduct = new System.Windows.Forms.ComboBox();
+            this.comboBoxKomlect = new System.Windows.Forms.ComboBox();
             this.textBoxCount = new System.Windows.Forms.TextBox();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.labelCount = new System.Windows.Forms.Label();
-            this.labelProduct = new System.Windows.Forms.Label();
+            this.labelKomlect = new System.Windows.Forms.Label();
             this.labelSum = new System.Windows.Forms.Label();
             this.textBoxSum = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // comboBoxProduct
+            // comboBoxKomlect
             // 
-            this.comboBoxProduct.FormattingEnabled = true;
-            this.comboBoxProduct.Location = new System.Drawing.Point(131, 38);
-            this.comboBoxProduct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.comboBoxProduct.Name = "comboBoxProduct";
-            this.comboBoxProduct.Size = new System.Drawing.Size(437, 24);
-            this.comboBoxProduct.TabIndex = 11;
-            this.comboBoxProduct.SelectedIndexChanged += new System.EventHandler(this.ComboBoxProduct_SelectedIndexChanged);
+            this.comboBoxKomlect.FormattingEnabled = true;
+            this.comboBoxKomlect.Location = new System.Drawing.Point(131, 38);
+            this.comboBoxKomlect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxKomlect.Name = "comboBoxKomlect";
+            this.comboBoxKomlect.Size = new System.Drawing.Size(437, 24);
+            this.comboBoxKomlect.TabIndex = 11;
+            this.comboBoxKomlect.SelectedIndexChanged += new System.EventHandler(this.ComboBoxKomlect_SelectedIndexChanged);
             // 
             // textBoxCount
             // 
@@ -89,15 +89,15 @@
             this.labelCount.TabIndex = 7;
             this.labelCount.Text = "Количество";
             // 
-            // labelProduct
+            // labelKomlect
             // 
-            this.labelProduct.AutoSize = true;
-            this.labelProduct.Location = new System.Drawing.Point(35, 42);
-            this.labelProduct.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelProduct.Name = "labelProduct";
-            this.labelProduct.Size = new System.Drawing.Size(69, 17);
-            this.labelProduct.TabIndex = 6;
-            this.labelProduct.Text = "Изделие ";
+            this.labelKomlect.AutoSize = true;
+            this.labelKomlect.Location = new System.Drawing.Point(35, 42);
+            this.labelKomlect.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelKomlect.Name = "labelKomlect";
+            this.labelKomlect.Size = new System.Drawing.Size(69, 17);
+            this.labelKomlect.TabIndex = 6;
+            this.labelKomlect.Text = "Изделие ";
             // 
             // labelSum
             // 
@@ -124,12 +124,12 @@
             this.ClientSize = new System.Drawing.Size(604, 194);
             this.Controls.Add(this.textBoxSum);
             this.Controls.Add(this.labelSum);
-            this.Controls.Add(this.comboBoxProduct);
+            this.Controls.Add(this.comboBoxKomlect);
             this.Controls.Add(this.textBoxCount);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.labelCount);
-            this.Controls.Add(this.labelProduct);
+            this.Controls.Add(this.labelKomlect);
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormCreateOrder";
             this.Text = "Заказ";
@@ -141,12 +141,12 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBoxProduct;
+        private System.Windows.Forms.ComboBox comboBoxKomlect;
         private System.Windows.Forms.TextBox textBoxCount;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Label labelCount;
-        private System.Windows.Forms.Label labelProduct;
+        private System.Windows.Forms.Label labelKomlect;
         private System.Windows.Forms.Label labelSum;
         private System.Windows.Forms.TextBox textBoxSum;
     }

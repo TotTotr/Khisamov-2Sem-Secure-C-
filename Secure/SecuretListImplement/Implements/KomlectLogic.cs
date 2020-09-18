@@ -8,114 +8,114 @@ using System.Text;
 
 namespace SecuretListImplement.Implements
 {
-    public class ProductLogic : IProductLogic
+    public class KomlectLogic : IKomlectLogic
     {
         private readonly DataListSingleton source;
 
-        public ProductLogic()
+        public KomlectLogic()
         {
             source = DataListSingleton.GetInstance();
         }
-        public void CreateOrUpdate(ProductConcreteBindingModel model)
+        public void CreateOrUpdate(KomlectConcreteBindingModel model)
         {
-            Product tempProduct = model.Id.HasValue ? null : new Product { Id = 1 };
-            foreach (var product in source.Products)
+            Komlect tempKomlect = model.Id.HasValue ? null : new Komlect { Id = 1 };
+            foreach (var Komlect in source.Komlects)
             {
-                if (product.ProductName == model.ProductName && product.Id != model.Id)
+                if (Komlect.KomlectName == model.KomlectName && Komlect.Id != model.Id)
                 {
                     throw new Exception("Уже есть изделие с таким названием");
                 }
-                if (!model.Id.HasValue && product.Id >= tempProduct.Id)
+                if (!model.Id.HasValue && Komlect.Id >= tempKomlect.Id)
                 {
-                    tempProduct.Id = product.Id + 1;
+                    tempKomlect.Id = Komlect.Id + 1;
                 }
-                else if (model.Id.HasValue && product.Id == model.Id)
+                else if (model.Id.HasValue && Komlect.Id == model.Id)
                 {
-                    tempProduct = product;
+                    tempKomlect = Komlect;
                 }
             }
             if (model.Id.HasValue)
             {
-                if (tempProduct == null)
+                if (tempKomlect == null)
                 {
                     throw new Exception("Элемент не найден");
                 }
-                CreateModel(model, tempProduct);
+                CreateModel(model, tempKomlect);
             }
             else
             {
-                source.Products.Add(CreateModel(model, tempProduct));
+                source.Komlects.Add(CreateModel(model, tempKomlect));
             }
         }
-        public void Delete(ProductConcreteBindingModel model)
+        public void Delete(KomlectConcreteBindingModel model)
         {
             // удаляем записи по компонентам при удалении изделия
-            for (int i = 0; i < source.ProductComponents.Count; ++i)
+            for (int i = 0; i < source.KomlectComponents.Count; ++i)
             {
-                if (source.ProductComponents[i].ProductId == model.Id)
+                if (source.KomlectComponents[i].KomlectId == model.Id)
                 {
-                    source.ProductComponents.RemoveAt(i--);
+                    source.KomlectComponents.RemoveAt(i--);
                 }
             }
-            for (int i = 0; i < source.Products.Count; ++i)
+            for (int i = 0; i < source.Komlects.Count; ++i)
             {
-                if (source.Products[i].Id == model.Id)
+                if (source.Komlects[i].Id == model.Id)
                 {
-                    source.Products.RemoveAt(i);
+                    source.Komlects.RemoveAt(i);
                     return;
                 }
             }
             throw new Exception("Элемент не найден");
         }
-        private Product CreateModel(ProductConcreteBindingModel model, Product product)
+        private Komlect CreateModel(KomlectConcreteBindingModel model, Komlect Komlect)
         {
-            product.ProductName = model.ProductName;
-            product.Price = model.Price;
+            Komlect.KomlectName = model.KomlectName;
+            Komlect.Price = model.Price;
             //обновляем существуюущие компоненты и ищем максимальный идентификатор
             int maxPCId = 0;
-            for (int i = 0; i < source.ProductComponents.Count; ++i)
+            for (int i = 0; i < source.KomlectComponents.Count; ++i)
             {
-                if (source.ProductComponents[i].Id > maxPCId)
+                if (source.KomlectComponents[i].Id > maxPCId)
                 {
-                    maxPCId = source.ProductComponents[i].Id;
+                    maxPCId = source.KomlectComponents[i].Id;
                 }
-                if (source.ProductComponents[i].ProductId == product.Id)
+                if (source.KomlectComponents[i].KomlectId == Komlect.Id)
                 {
                     // если в модели пришла запись компонента с таким id
                     if
-                    (model.ProductComponents.ContainsKey(source.ProductComponents[i].ComponentId))
+                    (model.KomlectComponents.ContainsKey(source.KomlectComponents[i].ComponentId))
                     {
                         // обновляем количество
-                        source.ProductComponents[i].Count =
-                        model.ProductComponents[source.ProductComponents[i].ComponentId].Item2;
+                        source.KomlectComponents[i].Count =
+                        model.KomlectComponents[source.KomlectComponents[i].ComponentId].Item2;
                         // из модели убираем эту запись, чтобы остались только не
                         //    просмотренные
 
-                        model.ProductComponents.Remove(source.ProductComponents[i].ComponentId);
+                        model.KomlectComponents.Remove(source.KomlectComponents[i].ComponentId);
                     }
                     else
                     {
-                        source.ProductComponents.RemoveAt(i--);
+                        source.KomlectComponents.RemoveAt(i--);
                     }
                 }
             }
             // новые записи
-            foreach (var pc in model.ProductComponents)
+            foreach (var pc in model.KomlectComponents)
             {
-                source.ProductComponents.Add(new ProductComponent
+                source.KomlectComponents.Add(new KomlectComponent
                 {
                     Id = ++maxPCId,
-                    ProductId = product.Id,
+                    KomlectId = Komlect.Id,
                     ComponentId = pc.Key,
                     Count = pc.Value.Item2
                 });
             }
-            return product;
+            return Komlect;
         }
-        public List<ProductViewModel> Read(ProductConcreteBindingModel model)
+        public List<KomlectViewModel> Read(KomlectConcreteBindingModel model)
         {
-            List<ProductViewModel> result = new List<ProductViewModel>();
-            foreach (var component in source.Products)
+            List<KomlectViewModel> result = new List<KomlectViewModel>();
+            foreach (var component in source.Komlects)
             {
                 if (model != null)
                 {
@@ -130,15 +130,15 @@ namespace SecuretListImplement.Implements
             }
             return result;
         }
-        private ProductViewModel CreateViewModel(Product product)
+        private KomlectViewModel CreateViewModel(Komlect Komlect)
         {
             // требуется дополнительно получить список компонентов для изделия с
             //  названиями и их количество
-            Dictionary<int, (string, int)> productComponents = new Dictionary<int,
+            Dictionary<int, (string, int)> KomlectComponents = new Dictionary<int,
     (string, int)>();
-            foreach (var pc in source.ProductComponents)
+            foreach (var pc in source.KomlectComponents)
             {
-                if (pc.ProductId == product.Id)
+                if (pc.KomlectId == Komlect.Id)
                 {
                     string componentName = string.Empty;
                     foreach (var component in source.Components)
@@ -149,15 +149,15 @@ namespace SecuretListImplement.Implements
                             break;
                         }
                     }
-                    productComponents.Add(pc.ComponentId, (componentName, pc.Count));
+                    KomlectComponents.Add(pc.ComponentId, (componentName, pc.Count));
                 }
             }
-            return new ProductViewModel
+            return new KomlectViewModel
             {
-                Id = product.Id,
-                ProductName = product.ProductName,
-                Price = product.Price,
-                ProductComponents = productComponents
+                Id = Komlect.Id,
+                KomlectName = Komlect.KomlectName,
+                Price = Komlect.Price,
+                KomlectComponents = KomlectComponents
             };
         }
     }

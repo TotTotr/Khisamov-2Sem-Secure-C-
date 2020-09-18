@@ -1,5 +1,5 @@
 ﻿using SecureLogic.BindingModels;
-using SecureLogic.BusinessLogics;
+using SecureLogic.BusinessLogic;
 using SecureLogic.Interfaces;
 using System;
 using System.Windows.Forms;
@@ -13,13 +13,16 @@ namespace Secure
         public new IUnityContainer Container { get; set; }
         private readonly MainLogic logic;
         private readonly IOrderLogic orderLogic;
+        private readonly ReportLogic reportLogic;
 
-        public FormMain(MainLogic logic, IOrderLogic orderLogic)
+        public FormMain(MainLogic mainLogic, ReportLogic reportLogic, IOrderLogic orderLogic)
         {
             InitializeComponent();
-            this.logic = logic;
+            this.logic = mainLogic;
+            this.reportLogic = reportLogic;
             this.orderLogic = orderLogic;
         }
+
         private void FormMain_Load(object sender, EventArgs e)
         {
             LoadData();
@@ -118,6 +121,35 @@ namespace Secure
         private void ИзделияToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormKomlects>();
+            form.ShowDialog();
+        }
+
+        private void списокИзделийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    reportLogic.SaveKomlectsToWordFile(new ReportBindingModel
+                    {
+                        FileName =
+                   dialog.FileName
+                    });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                   MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void компонентыПоИзделиямToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportKomlectComponents>();
+            form.ShowDialog();
+        }
+
+        private void списокЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportOrders>();
             form.ShowDialog();
         }
     }

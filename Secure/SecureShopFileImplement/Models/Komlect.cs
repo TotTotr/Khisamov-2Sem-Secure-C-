@@ -7,10 +7,10 @@ namespace SecureShopFileImplement.Models
     /// <summary>
     /// Изделие, изготавливаемое в магазине
     /// </summary>
-    public class Product
+    public class Komlect
     {
         public int Id { get; set; }
-        public string ProductName { get; set; }
+        public string KomlectName { get; set; }
         public decimal Price { get; set; }
     }
 

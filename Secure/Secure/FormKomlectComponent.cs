@@ -1,6 +1,6 @@
 ﻿namespace Secure
 {
-    partial class FormProductComponent
+    partial class FormKomlectComponent
     {
         /// <summary>
         /// Required designer variable.
@@ -89,7 +89,7 @@
             this.comboBoxComponent.Size = new System.Drawing.Size(329, 21);
             this.comboBoxComponent.TabIndex = 5;
             // 
-            // FormProductComponent
+            // FormKomlectComponent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -100,7 +100,7 @@
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.labelCount);
             this.Controls.Add(this.labelComponents);
-            this.Name = "FormProductComponent";
+            this.Name = "FormKomlectComponent";
             this.Text = "Компонент изделия";
             this.ResumeLayout(false);
             this.PerformLayout();

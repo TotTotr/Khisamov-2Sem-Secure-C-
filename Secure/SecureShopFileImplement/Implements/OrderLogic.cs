@@ -34,7 +34,7 @@ namespace SecureShopFileImplement.Implements
                 element = new Order { Id = maxId + 1 };
                 source.Orders.Add(element);
             }
-            element.ProductId = model.ProductId == 0 ? element.ProductId : model.ProductId;
+            element.KomlectId = model.KomlectId == 0 ? element.KomlectId : model.KomlectId;
             element.Count = model.Count;
             element.Sum = model.Sum;
             element.Status = model.Status;
@@ -61,7 +61,7 @@ namespace SecureShopFileImplement.Implements
             .Select(rec => new OrderViewModel
             {
                 Id = rec.Id,
-                ProductName = GetProductName(rec.ProductId),
+                KomlectName = GetKomlectName(rec.KomlectId),
                 Count = rec.Count,
                 Sum = rec.Sum,
                 Status = rec.Status,
@@ -70,11 +70,11 @@ namespace SecureShopFileImplement.Implements
             })
             .ToList();
         }
-        private string GetProductName(int id)
+        private string GetKomlectName(int id)
         {
             string name = "";
-            var product = source.Products.FirstOrDefault(x => x.Id == id);
-            name = product != null ? product.ProductName : "";
+            var Komlect = source.Komlects.FirstOrDefault(x => x.Id == id);
+            name = Komlect != null ? Komlect.KomlectName : "";
             return name;
         }
     }

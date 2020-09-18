@@ -1,18 +1,16 @@
-﻿using System;
+﻿using SecureLogic.BindingModels;
 using SecureLogic.Interfaces;
-using SecureLogic.BindingModels;
 using SecureLogic.ViewModels;
 using SecureShopDatabaseImplement.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
-
 namespace SecureShopDatabaseImplement.Implements
 {
-    public class ProductLogic : IProductLogic
+    public class KomlectLogic : IKomlectLogic
     {
-        public void CreateOrUpdate(ProductConcreteBindingModel model)
+        public void CreateOrUpdate(KomlectConcreteBindingModel model)
         {
             using (var context = new SecureShopDatabase())
             {
@@ -20,15 +18,15 @@ namespace SecureShopDatabaseImplement.Implements
                 {
                     try
                     {
-                        Product element = context.Products.FirstOrDefault(rec =>
-                       rec.ProductName == model.ProductName && rec.Id != model.Id);
+                        Komlect element = context.Komlects.FirstOrDefault(rec =>
+                       rec.KomlectName == model.KomlectName && rec.Id != model.Id);
                         if (element != null)
                         {
                             throw new Exception("Уже есть изделие с таким названием");
                         }
                         if (model.Id.HasValue)
                         {
-                            element = context.Products.FirstOrDefault(rec => rec.Id ==
+                            element = context.Komlects.FirstOrDefault(rec => rec.Id ==
                            model.Id);
                             if (element == null)
                             {
@@ -37,37 +35,37 @@ namespace SecureShopDatabaseImplement.Implements
                         }
                         else
                         {
-                            element = new Product();
-                            context.Products.Add(element);
+                            element = new Komlect();
+                            context.Komlects.Add(element);
                         }
-                        element.ProductName = model.ProductName;
+                        element.KomlectName = model.KomlectName;
                         element.Price = model.Price;
                         context.SaveChanges();
                         if (model.Id.HasValue)
                         {
-                            var productComponents = context.ProductComponents.Where(rec
-                           => rec.ProductId == model.Id.Value).ToList();
+                            var KomlectComponents = context.KomlectComponents.Where(rec
+                           => rec.KomlectId == model.Id.Value).ToList();
                             // удалили те, которых нет в модели
 
-                            context.ProductComponents.RemoveRange(productComponents.Where(rec =>
-                            !model.ProductComponents.ContainsKey(rec.ComponentId)).ToList());
+                            context.KomlectComponents.RemoveRange(KomlectComponents.Where(rec =>
+                            !model.KomlectComponents.ContainsKey(rec.ComponentId)).ToList());
                             context.SaveChanges();
                             // обновили количество у существующих записей
-                            foreach (var updateComponent in productComponents)
+                            foreach (var updateComponent in KomlectComponents)
                             {
                                 updateComponent.Count =
-                               model.ProductComponents[updateComponent.ComponentId].Item2;
+                               model.KomlectComponents[updateComponent.ComponentId].Item2;
 
-                                model.ProductComponents.Remove(updateComponent.ComponentId);
+                                model.KomlectComponents.Remove(updateComponent.ComponentId);
                             }
                             context.SaveChanges();
                         }
                         // добавили новые
-                        foreach (var pc in model.ProductComponents)
+                        foreach (var pc in model.KomlectComponents)
                         {
-                            context.ProductComponents.Add(new ProductComponent
+                            context.KomlectComponents.Add(new KomlectComponent
                             {
-                                ProductId = element.Id,
+                                KomlectId = element.Id,
                                 ComponentId = pc.Key,
                                 Count = pc.Value.Item2
                             });
@@ -83,7 +81,7 @@ namespace SecureShopDatabaseImplement.Implements
                 }
             }
         }
-        public void Delete(ProductConcreteBindingModel model)
+        public void Delete(KomlectConcreteBindingModel model)
         {
             using (var context = new SecureShopDatabase())
             {
@@ -92,13 +90,12 @@ namespace SecureShopDatabaseImplement.Implements
                     try
                     {
                         // удаяем записи по компонентам при удалении изделия
-                        context.ProductComponents.RemoveRange(context.ProductComponents.Where(rec =>
-                        rec.ProductId == model.Id));
-                        Product element = context.Products.FirstOrDefault(rec => rec.Id
-                        == model.Id);
+                        context.KomlectComponents.RemoveRange(context.KomlectComponents.Where(rec =>
+                        rec.KomlectId == model.Id));
+                        Komlect element = context.Komlects.FirstOrDefault(rec => rec.Id == model.Id);
                         if (element != null)
                         {
-                            context.Products.Remove(element);
+                            context.Komlects.Remove(element);
                             context.SaveChanges();
                         }
                         else
@@ -115,20 +112,21 @@ namespace SecureShopDatabaseImplement.Implements
                 }
             }
         }
-        public List<ProductViewModel> Read(ProductConcreteBindingModel model)
+        public List<KomlectViewModel> Read(KomlectConcreteBindingModel model)
         {
             using (var context = new SecureShopDatabase())
             {
-                return context.Products
+                return context.Komlects
                 .Where(rec => model == null || rec.Id == model.Id)
                 .ToList()
-               .Select(rec => new ProductViewModel
+               .Select(rec => new KomlectViewModel
                {
                    Id = rec.Id,
-                   ProductName = rec.ProductName,
+                   KomlectName = rec.KomlectName,
                    Price = rec.Price,
-                   ProductComponents = context.ProductComponents.Include(recPC => recPC.Component)
-               .Where(recPC => recPC.ProductId == rec.Id)
+                   KomlectComponents = context.KomlectComponents
+                .Include(recPC => recPC.Component)
+               .Where(recPC => recPC.KomlectId == rec.Id)
                .ToDictionary(recPC => recPC.ComponentId, recPC =>
                 (recPC.Component?.ComponentName, recPC.Count))
                })

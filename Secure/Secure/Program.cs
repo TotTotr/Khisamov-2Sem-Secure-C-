@@ -1,6 +1,6 @@
 ﻿using SecureShopDatabaseImplement.Implements;
 using SecureLogic.Interfaces;
-using SecureLogic.BusinessLogics;
+using SecureLogic.BusinessLogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,8 +32,9 @@ namespace Secure
                HierarchicalLifetimeManager());
                 currentContainer.RegisterType<IOrderLogic, OrderLogic>(new
                HierarchicalLifetimeManager());
-                currentContainer.RegisterType<IProductLogic, ProductLogic>(new
+                currentContainer.RegisterType<IKomlectLogic, KomlectLogic>(new
                HierarchicalLifetimeManager());
+                currentContainer.RegisterType<ReportLogic>(new HierarchicalLifetimeManager());
                 currentContainer.RegisterType<MainLogic>(new HierarchicalLifetimeManager());
                 return currentContainer;
             }

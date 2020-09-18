@@ -15,18 +15,18 @@ namespace SecureShopFileImplement
             private static FileDataListSingleton instance;
             private readonly string ComponentFileName = "Component.xml";
             private readonly string OrderFileName = "Order.xml";
-            private readonly string ProductFileName = "Product.xml";
-            private readonly string ProductComponentFileName = "ProductComponent.xml";
+            private readonly string KomlectFileName = "Komlect.xml";
+            private readonly string KomlectComponentFileName = "KomlectComponent.xml";
             public List<Component> Components { get; set; }
             public List<Order> Orders { get; set; }
-            public List<Product> Products { get; set; }
-            public List<ProductComponent> ProductComponents { get; set; }
+            public List<Komlect> Komlects { get; set; }
+            public List<KomlectComponent> KomlectComponents { get; set; }
             private FileDataListSingleton()
             {
                 Components = LoadComponents();
                 Orders = LoadOrders();
-                Products = LoadProducts();
-                ProductComponents = LoadProductComponents();
+                Komlects = LoadKomlects();
+                KomlectComponents = LoadKomlectComponents();
             }
             public static FileDataListSingleton GetInstance()
             {
@@ -40,8 +40,8 @@ namespace SecureShopFileImplement
             {
                 SaveComponents();
                 SaveOrders();
-                SaveProducts();
-                SaveProductComponents();
+                SaveKomlects();
+                SaveKomlectComponents();
             }
             private List<Component> LoadComponents()
             {
@@ -73,7 +73,7 @@ namespace SecureShopFileImplement
                         list.Add(new Order
                         {
                             Id = Convert.ToInt32(elem.Attribute("Id").Value),
-                            ProductId = Convert.ToInt32(elem.Element("ProductId").Value),
+                            KomlectId = Convert.ToInt32(elem.Element("KomlectId").Value),
                             Count = Convert.ToInt32(elem.Element("Count").Value),
                             Sum = Convert.ToDecimal(elem.Element("Sum").Value),
                             Status = (OrderStatus)Enum.Parse(typeof(OrderStatus),
@@ -88,38 +88,38 @@ namespace SecureShopFileImplement
                 }
                 return list;
             }
-            private List<Product> LoadProducts()
+            private List<Komlect> LoadKomlects()
             {
-                var list = new List<Product>();
-                if (File.Exists(ProductFileName))
+                var list = new List<Komlect>();
+                if (File.Exists(KomlectFileName))
                 {
-                    XDocument xDocument = XDocument.Load(ProductFileName);
-                    var xElements = xDocument.Root.Elements("Product").ToList();
+                    XDocument xDocument = XDocument.Load(KomlectFileName);
+                    var xElements = xDocument.Root.Elements("Komlect").ToList();
                     foreach (var elem in xElements)
                     {
-                        list.Add(new Product
+                        list.Add(new Komlect
                         {
                             Id = Convert.ToInt32(elem.Attribute("Id").Value),
-                            ProductName = elem.Element("ProductName").Value,
+                            KomlectName = elem.Element("KomlectName").Value,
                             Price = Convert.ToDecimal(elem.Element("Price").Value)
                         });
                     }
                 }
                 return list;
             }
-            private List<ProductComponent> LoadProductComponents()
+            private List<KomlectComponent> LoadKomlectComponents()
             {
-                var list = new List<ProductComponent>();
-                if (File.Exists(ProductComponentFileName))
+                var list = new List<KomlectComponent>();
+                if (File.Exists(KomlectComponentFileName))
                 {
-                    XDocument xDocument = XDocument.Load(ProductComponentFileName);
-                    var xElements = xDocument.Root.Elements("ProductComponent").ToList();
+                    XDocument xDocument = XDocument.Load(KomlectComponentFileName);
+                    var xElements = xDocument.Root.Elements("KomlectComponent").ToList();
                     foreach (var elem in xElements)
                     {
-                        list.Add(new ProductComponent
+                        list.Add(new KomlectComponent
                         {
                             Id = Convert.ToInt32(elem.Attribute("Id").Value),
-                            ProductId = Convert.ToInt32(elem.Element("ProductId").Value),
+                            KomlectId = Convert.ToInt32(elem.Element("KomlectId").Value),
                             ComponentId = Convert.ToInt32(elem.Element("ComponentId").Value),
                             Count = Convert.ToInt32(elem.Element("Count").Value)
                         });
@@ -151,7 +151,7 @@ namespace SecureShopFileImplement
                     {
                         xElement.Add(new XElement("Order",
                         new XAttribute("Id", order.Id),
-                        new XElement("ProductId", order.ProductId),
+                        new XElement("KomlectId", order.KomlectId),
                         new XElement("Count", order.Count),
                         new XElement("Sum", order.Sum),
                         new XElement("Status", order.Status),
@@ -162,37 +162,37 @@ namespace SecureShopFileImplement
                     xDocument.Save(OrderFileName);
                 }
             }
-            private void SaveProducts()
+            private void SaveKomlects()
             {
-                if (Products != null)
+                if (Komlects != null)
                 {
-                    var xElement = new XElement("Products");
-                    foreach (var product in Products)
+                    var xElement = new XElement("Komlects");
+                    foreach (var Komlect in Komlects)
                     {
-                        xElement.Add(new XElement("Product",
-                        new XAttribute("Id", product.Id),
-                        new XElement("ProductName", product.ProductName),
-                        new XElement("Price", product.Price)));
+                        xElement.Add(new XElement("Komlect",
+                        new XAttribute("Id", Komlect.Id),
+                        new XElement("KomlectName", Komlect.KomlectName),
+                        new XElement("Price", Komlect.Price)));
                     }
                     XDocument xDocument = new XDocument(xElement);
-                    xDocument.Save(ProductFileName);
+                    xDocument.Save(KomlectFileName);
                 }
             }
-            private void SaveProductComponents()
+            private void SaveKomlectComponents()
             {
-                if (ProductComponents != null)
+                if (KomlectComponents != null)
                 {
-                    var xElement = new XElement("ProductComponents");
-                    foreach (var productComponent in ProductComponents)
+                    var xElement = new XElement("KomlectComponents");
+                    foreach (var KomlectComponent in KomlectComponents)
                     {
-                        xElement.Add(new XElement("ProductComponent",
-                        new XAttribute("Id", productComponent.Id),
-                        new XElement("ProductId", productComponent.ProductId),
-                        new XElement("ComponentId", productComponent.ComponentId),
-                        new XElement("Count", productComponent.Count)));
+                        xElement.Add(new XElement("KomlectComponent",
+                        new XAttribute("Id", KomlectComponent.Id),
+                        new XElement("KomlectId", KomlectComponent.KomlectId),
+                        new XElement("ComponentId", KomlectComponent.ComponentId),
+                        new XElement("Count", KomlectComponent.Count)));
                     }
                     XDocument xDocument = new XDocument(xElement);
-                    xDocument.Save(ProductComponentFileName);
+                    xDocument.Save(KomlectComponentFileName);
                 }
             }
         }
