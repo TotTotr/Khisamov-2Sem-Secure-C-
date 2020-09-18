@@ -63,6 +63,7 @@ namespace SecuretListImplement.Implements
         {
             order.KomlectId = model.KomlectId;
             order.Count = model.Count;
+            order.ClientId = (int)model.ClientId;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
             order.Sum = model.Sum;
@@ -79,7 +80,7 @@ namespace SecuretListImplement.Implements
             {
                 if (model != null)
                 {
-                    if (order.Id == model.Id)
+                    if (order.Id == model.Id || model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo)
                     {
                         result.Add(CreateViewModel(order));
                         break;
@@ -114,6 +115,7 @@ namespace SecuretListImplement.Implements
             return new OrderViewModel
             {
                 Id = order.Id,
+                ClientId = order.ClientId,
                 KomlectId = order.KomlectId,
                 KomlectName = KomlectName,
                 Count = order.Count,

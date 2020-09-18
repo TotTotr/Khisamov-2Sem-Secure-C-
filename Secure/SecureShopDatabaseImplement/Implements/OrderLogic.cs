@@ -33,6 +33,7 @@ namespace SecureShopDatabaseImplement.Implements
                     context.Orders.Add(element);
                 }
                 element.KomlectId = model.KomlectId == 0 ? element.KomlectId : model.KomlectId;
+                element.ClientId = model.ClientId == null ? element.ClientId : (int)model.ClientId;
                 element.Count = model.Count;
                 element.Sum = model.Sum;
                 element.Status = model.Status;
@@ -63,24 +64,28 @@ model.Id);
 
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
-            using (var context = new SecureShopDatabase())
+            using (var source = new SecureShopDatabase())
             {
-                return context.Orders
-                    .Where(rec => model == null
-                    || (rec.Id == model.Id && model.Id.HasValue)
-                    || (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
-                .Include(x => x.Komlect)
-                .Select(rec => new OrderViewModel
-                {
-                    Id = rec.Id,
-                    KomlectName = rec.Komlect.KomlectName,
-                    Count = rec.Count,
-                    Sum = rec.Sum,
-                    Status = rec.Status,
-                    DateCreate = rec.DateCreate,
-                    DateImplement = rec.DateImplement
-                })
-               .ToList();
+                return source.Orders.Where(
+                 rec => model == null ||
+                 (rec.Id == model.Id && model.Id.HasValue) ||
+                 (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) ||
+                 (model.ClientId.HasValue && rec.ClientId == model.ClientId)).Include(rec => rec.Komlect)
+                 .Include(rec => rec.Client)
+                 .Select(rec => new OrderViewModel
+                 {
+                     Id = rec.Id,
+                     KomlectId = rec.KomlectId,
+                     ClientId = rec.ClientId,
+                     DateCreate = rec.DateCreate,
+                     DateImplement = rec.DateImplement,
+                     Status = rec.Status,
+                     Count = rec.Count,
+                     Sum = rec.Sum,
+                     ClientFIO = rec.Client.ClientFIO,
+                     KomlectName = rec.Komlect.KomlectName
+                 })
+                .ToList();
             }
         }
     }

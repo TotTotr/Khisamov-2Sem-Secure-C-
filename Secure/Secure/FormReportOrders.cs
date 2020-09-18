@@ -43,7 +43,7 @@ namespace Secure
 
                     foreach (var date in dict)
                     {
-                        decimal dateSum = 0;
+                        int dateSum = 0;
 
                         dataGridView.Rows.Add(new object[] { date.Key, "", "" });
 

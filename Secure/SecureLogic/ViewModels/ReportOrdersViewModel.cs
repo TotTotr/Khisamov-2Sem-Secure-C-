@@ -10,7 +10,7 @@ namespace SecureLogic.ViewModels
         public DateTime DateCreate { get; set; }
         public string KomlectName { get; set; }
         public int Count { get; set; }
-        public decimal Sum { get; set; }
+        public int Sum { get; set; }
         public OrderStatus Status { get; set; }
     }
 }

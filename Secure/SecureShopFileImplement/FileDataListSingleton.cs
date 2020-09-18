@@ -17,17 +17,20 @@ namespace SecureShopFileImplement
             private readonly string OrderFileName = "Order.xml";
             private readonly string KomlectFileName = "Komlect.xml";
             private readonly string KomlectComponentFileName = "KomlectComponent.xml";
+            private readonly string ClientFileName = "Client.xml";
             public List<Component> Components { get; set; }
             public List<Order> Orders { get; set; }
             public List<Komlect> Komlects { get; set; }
             public List<KomlectComponent> KomlectComponents { get; set; }
-            private FileDataListSingleton()
+            public List<Client> Clients { get; set; }
+        private FileDataListSingleton()
             {
                 Components = LoadComponents();
                 Orders = LoadOrders();
                 Komlects = LoadKomlects();
                 KomlectComponents = LoadKomlectComponents();
-            }
+                Clients = LoadClients();
+        }
             public static FileDataListSingleton GetInstance()
             {
                 if (instance == null)
@@ -42,6 +45,7 @@ namespace SecureShopFileImplement
                 SaveOrders();
                 SaveKomlects();
                 SaveKomlectComponents();
+                SaveClients();
             }
             private List<Component> LoadComponents()
             {
@@ -75,7 +79,8 @@ namespace SecureShopFileImplement
                             Id = Convert.ToInt32(elem.Attribute("Id").Value),
                             KomlectId = Convert.ToInt32(elem.Element("KomlectId").Value),
                             Count = Convert.ToInt32(elem.Element("Count").Value),
-                            Sum = Convert.ToDecimal(elem.Element("Sum").Value),
+                            Sum = Convert.ToInt32(elem.Element("Sum").Value),
+                            ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
                             Status = (OrderStatus)Enum.Parse(typeof(OrderStatus),
                        elem.Element("Status").Value),
                             DateCreate =
@@ -101,7 +106,7 @@ namespace SecureShopFileImplement
                         {
                             Id = Convert.ToInt32(elem.Attribute("Id").Value),
                             KomlectName = elem.Element("KomlectName").Value,
-                            Price = Convert.ToDecimal(elem.Element("Price").Value)
+                            Price = Convert.ToInt32(elem.Element("Price").Value)
                         });
                     }
                 }
@@ -127,7 +132,28 @@ namespace SecureShopFileImplement
                 }
                 return list;
             }
-            private void SaveComponents()
+        private List<Client> LoadClients()
+        {
+            var list = new List<Client>();
+            if (File.Exists(ClientFileName))
+            {
+                XDocument xDocument = XDocument.Load(ClientFileName);
+                var xElements = xDocument.Root.Elements("Client").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Client
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ClientFIO = elem.Element("ClientFIO").Value,
+                        Email = elem.Element("Email").Value,
+                        Password = elem.Element("Password").Value
+                    });
+                }
+            }
+            return list;
+        }
+
+        private void SaveComponents()
             {
                 if (Components != null)
                 {
@@ -152,6 +178,7 @@ namespace SecureShopFileImplement
                         xElement.Add(new XElement("Order",
                         new XAttribute("Id", order.Id),
                         new XElement("KomlectId", order.KomlectId),
+                        new XElement("ClientId", order.ClientId),
                         new XElement("Count", order.Count),
                         new XElement("Sum", order.Sum),
                         new XElement("Status", order.Status),
@@ -195,5 +222,23 @@ namespace SecureShopFileImplement
                     xDocument.Save(KomlectComponentFileName);
                 }
             }
+
+        private void SaveClients()
+        {
+            if (Clients != null)
+            {
+                var xElement = new XElement("Clients");
+                foreach (var client in Clients)
+                {
+                    xElement.Add(new XElement("Client",
+                    new XAttribute("Id", client.Id),
+                    new XElement("ClientFIO", client.ClientFIO),
+                    new XElement("Email", client.Email),
+                    new XElement("Password", client.Password)));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(ClientFileName);
+            }
         }
-    } 
+    }
+}

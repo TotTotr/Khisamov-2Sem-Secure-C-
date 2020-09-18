@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace SecureLogic.BindingModels
 {
     /// Изделие, изготавливаемое в магазине 
@@ -11,7 +12,7 @@ namespace SecureLogic.BindingModels
 
         public string KomlectName { get; set; }
 
-        public decimal Price { get; set; }
+        public int Price { get; set; }
 
         public Dictionary<int, (string, int)> KomlectComponents { get; set; }
     }

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GiftSetName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.KomlectSetName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
@@ -46,10 +46,10 @@
             this.Date.HeaderText = "Дата";
             this.Date.Name = "Date";
             // 
-            // GiftSetName
+            // KomlectSetName
             // 
-            this.GiftSetName.HeaderText = "Заказ";
-            this.GiftSetName.Name = "GiftSetName";
+            this.KomlectSetName.HeaderText = "Заказ";
+            this.KomlectSetName.Name = "KomlectSetName";
             // 
             // Price
             // 
@@ -61,7 +61,7 @@
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Date,
-            this.GiftSetName,
+            this.KomlectSetName,
             this.Price});
             this.dataGridView.Location = new System.Drawing.Point(12, 72);
             this.dataGridView.Name = "dataGridView";
@@ -150,7 +150,7 @@
         private System.Windows.Forms.Button buttonExcel;
         private System.Windows.Forms.Button buttonCreate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GiftSetName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn KomlectSetName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Price;
     }
 }

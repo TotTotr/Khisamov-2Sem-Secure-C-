@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
+
 namespace SecureLogic.ViewModels
 {
     /// Компонент, требуемый для изготовления изделия 

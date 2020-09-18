@@ -97,7 +97,7 @@ namespace Secure
                 {
                     Id = id,
                     KomlectName = textBoxName.Text,
-                    Price = Convert.ToDecimal(textBoxPrice.Text),
+                    Price = Convert.ToInt32(textBoxPrice.Text),
                     KomlectComponents = KomlectComponents
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",

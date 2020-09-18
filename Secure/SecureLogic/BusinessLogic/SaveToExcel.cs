@@ -62,7 +62,7 @@ namespace SecureLogic.BusinessLogic
                 uint rowIndex = 2;
                 foreach (var date in info.Orders)
                 {
-                    decimal dateSum = 0;
+                    int dateSum = 0;
 
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
@@ -85,6 +85,7 @@ namespace SecureLogic.BusinessLogic
                             ColumnName = "B",
                             RowIndex = rowIndex,
                             Text = order.KomlectName,
+
                             StyleIndex = 1U
                         });
 

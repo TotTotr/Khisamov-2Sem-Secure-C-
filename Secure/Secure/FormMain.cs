@@ -152,5 +152,11 @@ namespace Secure
             var form = Container.Resolve<FormReportOrders>();
             form.ShowDialog();
         }
+
+        private void клиентToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormClients>();
+            form.ShowDialog();
+        }
     }
 }
