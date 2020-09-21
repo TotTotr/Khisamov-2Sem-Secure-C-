@@ -14,28 +14,52 @@ namespace Secure
         public new IUnityContainer Container { get; set; }
         private readonly IKomlectLogic logicP;
         private readonly MainLogic logicM;
+        private readonly IClientLogic logicC;
 
-        public FormCreateOrder(IKomlectLogic logicP, MainLogic logicM)
+
+        public FormCreateOrder(IKomlectLogic logicP, MainLogic logicM, IClientLogic logicC)
         {
             InitializeComponent();
             this.logicP = logicP;
             this.logicM = logicM;
+            this.logicC = logicC;
         }
+
+
         private void FormCreateOrder_Load(object sender, EventArgs e)
         {
             try
             {
-                var list = logicP.Read(null);
-                comboBoxKomlect.DataSource = list;
-                comboBoxKomlect.DisplayMember = "KomlectName";
-                comboBoxKomlect.ValueMember = "Id";
+                var listP = logicP.Read(null);
+
+                if (listP != null)
+
+                {
+
+                    comboBoxKomlect.DisplayMember = "KomlectName";
+                    comboBoxKomlect.ValueMember = "Id";
+                    comboBoxKomlect.DataSource = listP;
+                    comboBoxKomlect.SelectedItem = null;
+                }
+                var listC = logicC.Read(null);
+
+                if (listC != null)
+                {
+                    comboBoxClient.DisplayMember = "ClientFIO";
+                    comboBoxClient.ValueMember = "Id";
+                    comboBoxClient.DataSource = listC;
+                    comboBoxClient.SelectedItem = null;
+
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
+                MessageBoxIcon.Error);
             }
         }
+
+
         private void CalcSum()
         {
             if (comboBoxKomlect.SelectedValue != null &&
@@ -79,6 +103,7 @@ namespace Secure
                 {
                     KomlectId = Convert.ToInt32(comboBoxKomlect.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
+                    ClientId = Convert.ToInt32(comboBoxClient.SelectedValue),
                     Sum = Convert.ToInt32(textBoxSum.Text)
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
