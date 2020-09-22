@@ -156,7 +156,6 @@ namespace Secure
             var form = Container.Resolve<FormReportOrders>();
             form.ShowDialog();
         }
-
         private void запускРаботToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             work.DoWork();

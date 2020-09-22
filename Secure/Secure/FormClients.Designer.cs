@@ -1,4 +1,4 @@
-﻿namespace Secure
+namespace Secure
 {
     partial class FormClients
     {

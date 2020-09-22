@@ -15,8 +15,6 @@ namespace Secure
         private readonly IKomlectLogic logicP;
         private readonly MainLogic logicM;
         private readonly IClientLogic logicC;
-
-
         public FormCreateOrder(IKomlectLogic logicP, MainLogic logicM, IClientLogic logicC)
         {
             InitializeComponent();
@@ -129,10 +127,10 @@ namespace Secure
         {
             CalcSum();
         }
-
         private void ComboBoxKomlect_SelectedIndexChanged(object sender, EventArgs e)
         {
             CalcSum();
         }
+
     }
 }
