@@ -75,7 +75,7 @@ namespace SecureClientView
                 MessageBox.Show("Выберите изделие", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+  
             try
             {
                 ClientApi.PostRequest("api/main/createorder", new CreateOrderBindingModel
