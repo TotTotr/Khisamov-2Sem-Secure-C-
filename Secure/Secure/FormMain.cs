@@ -181,7 +181,8 @@ namespace Secure
             var form = Container.Resolve<FormMessages>();
             form.ShowDialog();
         }
-        private void создатьБэкапToolStripMenuItem_Click(object sender, EventArgs e)
+      
+        private void бэкапToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -191,15 +192,13 @@ namespace Secure
                     if (fbd.ShowDialog() == DialogResult.OK)
                     {
                         backUpAbstractLogic.CreateArchive(fbd.SelectedPath);
-                        MessageBox.Show("Бекап создан", "Сообщение",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Бекап создан", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
