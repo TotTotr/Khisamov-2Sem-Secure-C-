@@ -47,7 +47,6 @@ namespace SecureShopRestApi.Controllers
             CheckData(model);
             _logic.CreateOrUpdate(model);
         }
-
         private void CheckData(ClientBindingModel model)
         {
             if (!Regex.IsMatch(model.Email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
