@@ -13,6 +13,7 @@ namespace SecuretListImplement
         public List<Komlect> Komlects { get; set; }
         public List<KomlectComponent> KomlectComponents { get; set; }
         public List<Client> Clients { get; set; }
+        public List<Implementer> Implementers { get; set; }
         private DataListSingleton()
         {
             Components = new List<Component>();
@@ -20,6 +21,7 @@ namespace SecuretListImplement
             Komlects = new List<Komlect>();
             KomlectComponents = new List<KomlectComponent>();
             Clients = new List<Client>();
+            Implementers = new List<Implementer>();
         }
         public static DataListSingleton GetInstance()
         {

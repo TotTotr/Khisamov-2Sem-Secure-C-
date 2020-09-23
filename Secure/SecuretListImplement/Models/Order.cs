@@ -11,8 +11,8 @@ namespace SecuretListImplement.Models
     {
         public int Id { get; set; }
         public int KomlectId { get; set; }
-        public int GiftSetId { get; set; }
-        public int ClientId { get; set; }
+        public int ClientId { set; get; }
+        public int ImplementerId { get; set; }
         public int Count { get; set; }
         public int Sum { get; set; }
         public OrderStatus Status { get; set; }

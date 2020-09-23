@@ -14,13 +14,15 @@ namespace Secure
         private readonly MainLogic logic;
         private readonly IOrderLogic orderLogic;
         private readonly ReportLogic reportLogic;
+        private readonly WorkModeling work;
 
-        public FormMain(MainLogic mainLogic, ReportLogic reportLogic, IOrderLogic orderLogic)
+        public FormMain(MainLogic mainLogic, ReportLogic reportLogic, IOrderLogic orderLogic,WorkModeling work)
         {
             InitializeComponent();
             this.logic = mainLogic;
             this.reportLogic = reportLogic;
             this.orderLogic = orderLogic;
+            this.work = work;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -37,7 +39,9 @@ namespace Secure
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
                     dataGridView.Columns[1].Visible = false;
-                    dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Columns[2].Visible = false;
+                    dataGridView.Columns[3].Visible = false;
+                    dataGridView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
             catch (Exception ex)
@@ -152,8 +156,18 @@ namespace Secure
             var form = Container.Resolve<FormReportOrders>();
             form.ShowDialog();
         }
+        private void запускРаботToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            work.DoWork();
+        }
 
-        private void клиентToolStripMenuItem_Click(object sender, EventArgs e)
+        private void исполнителиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormImplementers>();
+            form.ShowDialog();
+        }
+
+        private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormClients>();
             form.ShowDialog();

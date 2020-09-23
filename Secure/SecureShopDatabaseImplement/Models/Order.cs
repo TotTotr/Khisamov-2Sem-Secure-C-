@@ -14,6 +14,8 @@ namespace SecureShopDatabaseImplement.Models
         public int Id { get; set; }
         public int KomlectId { get; set; }
         public int ClientId { get; set; }
+        public int? ImplementerId { get; set; }
+
         [Required]
         public int Count { get; set; }
         [Required]
@@ -25,5 +27,6 @@ namespace SecureShopDatabaseImplement.Models
         public DateTime? DateImplement { get; set; }
         public virtual Komlect Komlect { get; set; }
         public virtual Client Client { get; set; }
+        public Implementer Implementer { get; set; }
     }
 }

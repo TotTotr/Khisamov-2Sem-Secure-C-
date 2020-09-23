@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SecureLogic.Enums;
 
 namespace SecureShopDatabaseImplement.Implements
 {
@@ -34,6 +35,7 @@ namespace SecureShopDatabaseImplement.Implements
                 }
                 element.KomlectId = model.KomlectId == 0 ? element.KomlectId : model.KomlectId;
                 element.ClientId = model.ClientId == null ? element.ClientId : (int)model.ClientId;
+                element.ImplementerId = model.ImplementerId;
                 element.Count = model.Count;
                 element.Sum = model.Sum;
                 element.Status = model.Status;
@@ -67,15 +69,20 @@ model.Id);
             using (var source = new SecureShopDatabase())
             {
                 return source.Orders.Where(
-                 rec => model == null ||
-                 (rec.Id == model.Id && model.Id.HasValue) ||
-                 (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) ||
-                 (model.ClientId.HasValue && rec.ClientId == model.ClientId)).Include(rec => rec.Komlect)
-                 .Include(rec => rec.Client)
+               rec => model == null
+               || rec.Id == model.Id && model.Id.HasValue
+                   || model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo
+                   || model.ClientId.HasValue && rec.ClientId == model.ClientId
+                   || model.FreeOrders.HasValue && model.FreeOrders.Value && !rec.ImplementerId.HasValue
+                   || model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && rec.Status == OrderStatus.Выполняется)
+                .Include(rec => rec.Komlect)
+                .Include(rec => rec.Client)
+                .Include(rec => rec.Implementer)
                  .Select(rec => new OrderViewModel
                  {
                      Id = rec.Id,
                      KomlectId = rec.KomlectId,
+                     ImplementerId = rec.ImplementerId,
                      ClientId = rec.ClientId,
                      DateCreate = rec.DateCreate,
                      DateImplement = rec.DateImplement,
@@ -83,7 +90,8 @@ model.Id);
                      Count = rec.Count,
                      Sum = rec.Sum,
                      ClientFIO = rec.Client.ClientFIO,
-                     KomlectName = rec.Komlect.KomlectName
+                     KomlectName = rec.Komlect.KomlectName,
+                     ImplementerFIO = rec.ImplementerId.HasValue ? rec.Implementer.ImplementerFIO : string.Empty,
                  })
                 .ToList();
             }

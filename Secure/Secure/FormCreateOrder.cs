@@ -15,7 +15,6 @@ namespace Secure
         private readonly IKomlectLogic logicP;
         private readonly MainLogic logicM;
         private readonly IClientLogic logicC;
-
         public FormCreateOrder(IKomlectLogic logicP, MainLogic logicM, IClientLogic logicC)
         {
             InitializeComponent();
@@ -23,6 +22,8 @@ namespace Secure
             this.logicM = logicM;
             this.logicC = logicC;
         }
+
+
         private void FormCreateOrder_Load(object sender, EventArgs e)
         {
             try
@@ -55,6 +56,8 @@ namespace Secure
                 MessageBoxIcon.Error);
             }
         }
+
+
         private void CalcSum()
         {
             if (comboBoxKomlect.SelectedValue != null &&
@@ -98,8 +101,8 @@ namespace Secure
                 {
                     KomlectId = Convert.ToInt32(comboBoxKomlect.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
-                    Sum = Convert.ToInt32(textBoxSum.Text),
-                    ClientId = Convert.ToInt32(comboBoxClient.SelectedValue)
+                    ClientId = Convert.ToInt32(comboBoxClient.SelectedValue),
+                    Sum = Convert.ToInt32(textBoxSum.Text)
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                MessageBoxButtons.OK, MessageBoxIcon.Information);
