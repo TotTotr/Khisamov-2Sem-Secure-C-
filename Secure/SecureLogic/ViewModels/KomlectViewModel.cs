@@ -10,10 +10,7 @@ namespace SecureLogic.ViewModels
     /// Изделие, изготавливаемое в магазине   
     [DataContract]
     public class KomlectViewModel : BaseViewModel
-    {
-        [DataMember]
-        public int Id { get; set; }
-       
+    {       
         [Column(title: "Название изделия", gridViewAutoSize: GridViewAutoSize.Fill)]
         [DataMember]
         public string KomlectName { get; set; }
@@ -25,7 +22,8 @@ namespace SecureLogic.ViewModels
         public Dictionary<int, (string, int)> KomlectComponents { get; set; }
         public override List<string> Properties() => new List<string>
         {
-            "GiftSetName",
+            "Id",
+            "KomlectName",
             "Price"
         };
     }

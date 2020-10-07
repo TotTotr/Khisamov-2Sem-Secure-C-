@@ -8,7 +8,6 @@ namespace SecureLogic.ViewModels
 {
     public class ImplementerViewModel : BaseViewModel
     {
-        public int Id { get; set; }
         [Column(title: "ФИО исполнителя", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string ImplementerFIO { get; set; }
         [Column(title: "Время на заказ", width: 100)]

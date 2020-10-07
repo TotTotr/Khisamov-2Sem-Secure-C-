@@ -13,9 +13,6 @@ namespace SecureLogic.ViewModels
     public class ClientViewModel : BaseViewModel
     {
         [DataMember]
-        public int Id { get; set; }
-
-        [DataMember]
         [Column(title: "ФИО клиента", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string ClientFIO { get; set; }
 
@@ -28,6 +25,7 @@ namespace SecureLogic.ViewModels
         public string Password { get; set; }
         public override List<string> Properties() => new List<string>
         {
+            "Id",
             "ClientFIO",
             "Email"
         };

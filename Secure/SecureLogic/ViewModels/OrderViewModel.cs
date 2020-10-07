@@ -12,8 +12,6 @@ namespace SecureLogic.ViewModels
     public class OrderViewModel : BaseViewModel
     {
         [DataMember]
-        public int Id { get; set; }
-        [DataMember]
         public int ClientId { get; set; }
         [DataMember]
         public int KomlectId { get; set; }
@@ -54,9 +52,9 @@ namespace SecureLogic.ViewModels
         [DisplayName("Дата выполнения")] public DateTime? DateImplement { get; set; }
         public override List<string> Properties() => new List<string>
         {
-            "ImplementerId",
+            "Id",
             "ClientFIO",
-            "GiftSetName",
+            "KomlectName",
             "ImplementerFIO",
             "Count",
             "Sum",
