@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SecureLogic\SecureLogic.csproj" />
+    <ProjectReference Include="..\SecureShopDatabaseImplement\SecureShopDatabaseImplement.csproj" />
+  </ItemGroup>
+
+
+</Project>
