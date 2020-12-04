@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
@@ -9,7 +10,6 @@ using Microsoft.Extensions.Logging;
 using SecureLogic.BusinessLogic;
 using SecureLogic.HelperModels;
 using System.Configuration;
-
 namespace SecureRestApi
 {
     public class Program
@@ -17,7 +17,6 @@ namespace SecureRestApi
         public static void Main(string[] args)
         {
             MailLogic.MailConfig(new MailConfig
-
             {
 
                 SmtpClientHost = ConfigurationManager.AppSettings["SmtpClientHost"],

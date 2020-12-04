@@ -8,7 +8,7 @@ namespace SecureShopDatabaseImplement.Models
     public class MessageInfo
     {
         [Key]
-        public string Id { get; set; }
+        public string MessageId { get; set; }
 
         public int? ClientId { get; set; }
 

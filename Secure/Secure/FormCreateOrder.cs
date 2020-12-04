@@ -15,6 +15,7 @@ namespace Secure
         private readonly IKomlectLogic logicP;
         private readonly IClientLogic logicC;
         private readonly MainLogic logicM;
+        private readonly IClientLogic logicC;
 
         public FormCreateOrder(IKomlectLogic logicP, IClientLogic logicC, MainLogic logicM)
         {
@@ -22,6 +23,7 @@ namespace Secure
             this.logicP = logicP;
             this.logicC = logicC;
             this.logicM = logicM;
+            this.logicC = logicC;
         }
 
         private void FormCreateOrder_Load(object sender, EventArgs e)
@@ -76,7 +78,24 @@ namespace Secure
                 }
             }
         }
-        private void ButtonSave_Click(object sender, EventArgs e)
+        private void ButtonCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
+
+        }
+
+        private void TextBoxCount_TextChanged(object sender, EventArgs e)
+        {
+            CalcSum();
+        }
+
+        private void ComboBoxKomlect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CalcSum();
+        }
+
+        private void buttonSave_Click_1(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBoxCount.Text))
             {
@@ -92,6 +111,12 @@ namespace Secure
             {
                 MessageBox.Show("Выберите клиента", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }
+            if (comboBoxClient.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите клиента", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+
             }
             try
             {
@@ -110,23 +135,6 @@ namespace Secure
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void ButtonCancel_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-            Close();
-
-        }
-
-        private void TextBoxCount_TextChanged(object sender, EventArgs e)
-        {
-            CalcSum();
-        }
-
-        private void ComboBoxKomlect_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CalcSum();
         }
     }
 }

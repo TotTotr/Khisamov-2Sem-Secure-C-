@@ -16,7 +16,7 @@ namespace SecureShopDatabaseImplement.Implements
             using (var context = new SecureShopDatabase())
             {
                 MessageInfo element = context.MessageInfoes.FirstOrDefault(rec =>
-               rec.Id == model.MessageId);
+               rec.MessageId == model.MessageId);
                 if (element != null)
                 {
                     throw new Exception("Уже есть письмо с таким идентификатором");
@@ -25,7 +25,7 @@ namespace SecureShopDatabaseImplement.Implements
                model.FromMailAddress)?.Id;
                 context.MessageInfoes.Add(new MessageInfo
                 {
-                    Id = model.MessageId,
+                    MessageId = model.MessageId,
                     ClientId = clientId,
                     SenderName = model.FromMailAddress,
                     DateDelivery = model.DateDelivery,
@@ -43,7 +43,7 @@ namespace SecureShopDatabaseImplement.Implements
                 .Where(rec => model == null || rec.ClientId == model.ClientId)
                 .Select(rec => new MessageInfoViewModel
                 {
-                    MessageId = rec.Id,
+                    MessageId = rec.MessageId,
                     SenderName = rec.SenderName,
                     DateDelivery = rec.DateDelivery,
                     Subject = rec.Subject,

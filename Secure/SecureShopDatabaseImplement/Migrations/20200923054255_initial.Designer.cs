@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SecureShopDatabaseImplement;
 
 namespace SecureShopDatabaseImplement.Migrations
 {
     [DbContext(typeof(SecureShopDatabase))]
-    partial class SecureShopDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20200923054255_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -126,7 +128,7 @@ namespace SecureShopDatabaseImplement.Migrations
 
             modelBuilder.Entity("SecureShopDatabaseImplement.Models.MessageInfo", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("MessageId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Body")
@@ -143,7 +145,9 @@ namespace SecureShopDatabaseImplement.Migrations
 
                     b.Property<string>("Subject")
                         .HasColumnType("nvarchar(max)");
-                    b.HasKey("Id");
+
+                    b.HasKey("MessageId");
+
                     b.HasIndex("ClientId");
 
                     b.ToTable("MessageInfoes");

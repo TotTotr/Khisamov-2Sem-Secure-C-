@@ -27,7 +27,6 @@ namespace SecureShopRestApi.Controllers
             this._logic = logic;
             this._messageLogic = messageLogic;
         }
-
         [HttpGet]
         public ClientViewModel Login(string login, string password) => _logic.Read(new ClientBindingModel { Email = login, Password = password })?[0];
 

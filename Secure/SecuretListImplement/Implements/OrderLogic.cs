@@ -85,7 +85,7 @@ namespace SecuretListImplement.Implements
                     || model.FreeOrders.HasValue && model.FreeOrders.Value
                     || model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId && order.Status == OrderStatus.Выполняется)
                 {
-                    if (order.Id == model.Id)
+                    if (order.Id == model.Id || model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo)
                     {
                         result.Add(CreateViewModel(order));
                         break;

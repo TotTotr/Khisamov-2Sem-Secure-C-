@@ -24,7 +24,7 @@ namespace SecureLogic.BusinessLogic
             mailLogin = config.MailLogin;
             mailPassword = config.MailPassword;
         }
-        public static void MailSend(MailSendInfo info)
+        public static async void MailSendAsync(MailSendInfo info)
         {
             if (string.IsNullOrEmpty(smtpClientHost) || smtpClientPort == 0)
             {
@@ -55,8 +55,7 @@ namespace SecureLogic.BusinessLogic
                         objSmtpClient.UseDefaultCredentials = false;
                         objSmtpClient.EnableSsl = true;
                         objSmtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-                        objSmtpClient.Credentials = new NetworkCredential(mailLogin,
-                        mailPassword);
+                        objSmtpClient.Credentials = new NetworkCredential(mailLogin, mailPassword);
                         objSmtpClient.Send(objMailMessage);
                     }
                     catch (Exception)
@@ -84,8 +83,7 @@ namespace SecureLogic.BusinessLogic
             {
                 await Task.Run(() =>
                 {
-                    client.Connect(info.PopHost, info.PopPort,
-                  SecureSocketOptions.SslOnConnect);
+                    client.Connect(info.PopHost, info.PopPort, SecureSocketOptions.SslOnConnect);
                     client.Authenticate(mailLogin, mailPassword);
                     for (int i = 0; i < client.Count; i++)
                     {
