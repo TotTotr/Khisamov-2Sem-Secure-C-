@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 namespace SecureClientView
 {
+
     public partial class FormMain : Form
     {
         public FormMain()

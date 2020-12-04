@@ -71,8 +71,8 @@ model.Id);
                 return source.Orders.Where(
                  rec => model == null 
                   ||( model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && rec.Status == OrderStatus.Выполняется)||
-                 (rec.Id == model.Id && model.Id.HasValue) 
-                 || model.FreeOrders.HasValue && model.FreeOrders.Value && !rec.ImplementerId.HasValue ||
+                 (rec.Id == model.Id && model.Id.HasValue)
+                   || (model.FreeOrders.HasValue && model.FreeOrders.Value && !rec.ImplementerId.HasValue)||
                  (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) ||
                  (model.ClientId.HasValue && rec.ClientId == model.ClientId)).Include(rec => rec.Komlect)
                  .Include(rec => rec.Komlect)
@@ -91,7 +91,7 @@ model.Id);
                      Sum = rec.Sum,
                      ClientFIO = rec.Client.ClientFIO,
                      KomlectName = rec.Komlect.KomlectName,
-                     ImplementerFIO = rec.ImplementerId.HasValue ? rec.Implementer.ImplementerFIO : string.Empty,
+                     ImplementerFIO = rec.ImplementerId.HasValue ? rec.Implementer.ImplementerFIO : string.Empty
                  })
                 .ToList();
             }

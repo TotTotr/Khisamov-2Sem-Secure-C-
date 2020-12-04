@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SecureLogic.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.Serialization;
@@ -8,17 +9,22 @@ namespace SecureLogic.ViewModels
 {
     /// Изделие, изготавливаемое в магазине   
     [DataContract]
-    public class KomlectViewModel
-    {
-        [DataMember]
-        public int Id { get; set; }
-        [DisplayName("Название изделия")]
+    public class KomlectViewModel : BaseViewModel
+    {       
+        [Column(title: "Название изделия", gridViewAutoSize: GridViewAutoSize.Fill)]
         [DataMember]
         public string KomlectName { get; set; }
-        [DisplayName("Цена")]
+      
+        [Column(title: "Цена", width: 50)]
         [DataMember]
         public int Price { get; set; }
         [DataMember]
         public Dictionary<int, (string, int)> KomlectComponents { get; set; }
+        public override List<string> Properties() => new List<string>
+        {
+            "Id",
+            "KomlectName",
+            "Price"
+        };
     }
 }

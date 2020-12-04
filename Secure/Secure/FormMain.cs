@@ -11,43 +11,41 @@ namespace Secure
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
+
         private readonly MainLogic logic;
+
+        private readonly ReportLogic report;
+
         private readonly IOrderLogic orderLogic;
-        private readonly ReportLogic reportLogic;
+
         private readonly WorkModeling work;
 
-        public FormMain(MainLogic mainLogic, ReportLogic reportLogic, IOrderLogic orderLogic,WorkModeling work)
+        private readonly BackUpAbstractLogic backUpAbstractLogic;
+
+        public FormMain(MainLogic logic, ReportLogic report, WorkModeling work, IOrderLogic orderLogic, BackUpAbstractLogic backUpAbstractLogic)
         {
             InitializeComponent();
-            this.logic = mainLogic;
-            this.reportLogic = reportLogic;
-            this.orderLogic = orderLogic;
+            this.logic = logic;
+            this.report = report;
             this.work = work;
+            this.orderLogic = orderLogic;
+            this.backUpAbstractLogic = backUpAbstractLogic;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
         {
             LoadData();
         }
+
         private void LoadData()
         {
             try
             {
-                var list = orderLogic.Read(null);
-                if (list != null)
-                {
-                    dataGridView.DataSource = list;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].Visible = false;
-                    dataGridView.Columns[2].Visible = false;
-                    dataGridView.Columns[3].Visible = false;
-                    dataGridView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                }
+                Program.ConfigGrid(orderLogic.Read(null), dataGridView);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -134,7 +132,7 @@ namespace Secure
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    reportLogic.SaveKomlectsToWordFile(new ReportBindingModel
+                    report.SaveKomlectsToWordFile(new ReportBindingModel
                     {
                         FileName =
                    dialog.FileName
@@ -178,6 +176,26 @@ namespace Secure
         {
             var form = Container.Resolve<FormMessages>();
             form.ShowDialog();
+        }
+      
+        private void бэкапToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (backUpAbstractLogic != null)
+                {
+                    var fbd = new FolderBrowserDialog();
+                    if (fbd.ShowDialog() == DialogResult.OK)
+                    {
+                        backUpAbstractLogic.CreateArchive(fbd.SelectedPath);
+                        MessageBox.Show("Бекап создан", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

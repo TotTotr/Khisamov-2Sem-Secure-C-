@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SecureLogic.BusinessLogic;
 using SecureLogic.HelperModels;
-
+using System.Configuration;
 namespace SecureRestApi
 {
     public class Program
@@ -18,10 +18,15 @@ namespace SecureRestApi
         {
             MailLogic.MailConfig(new MailConfig
             {
+
                 SmtpClientHost = ConfigurationManager.AppSettings["SmtpClientHost"],
+
                 SmtpClientPort = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpClientPort"]),
+
                 MailLogin = ConfigurationManager.AppSettings["MailLogin"],
+
                 MailPassword = ConfigurationManager.AppSettings["MailPassword"],
+
             });
             CreateHostBuilder(args).Build().Run();
         }

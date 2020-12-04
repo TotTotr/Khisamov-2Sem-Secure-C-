@@ -44,6 +44,7 @@
             this.buttonPayOrder = new System.Windows.Forms.Button();
             this.buttonRef = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.бэкапToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -57,7 +58,7 @@
             this.запускРаботToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1071, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1178, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -106,7 +107,8 @@
             this.списокИзделийToolStripMenuItem,
             this.списокЗаказовToolStripMenuItem,
             this.компонентыПоИзделиямToolStripMenuItem,
-            this.сообщенияToolStripMenuItem});
+            this.сообщенияToolStripMenuItem,
+            this.бэкапToolStripMenuItem});
             this.отчетыToolStripMenuItem.Name = "отчетыToolStripMenuItem";
             this.отчетыToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.отчетыToolStripMenuItem.Text = "Отчеты";
@@ -148,7 +150,7 @@
             // 
             // buttonCreateOrder
             // 
-            this.buttonCreateOrder.Location = new System.Drawing.Point(898, 37);
+            this.buttonCreateOrder.Location = new System.Drawing.Point(1010, 46);
             this.buttonCreateOrder.Name = "buttonCreateOrder";
             this.buttonCreateOrder.Size = new System.Drawing.Size(140, 27);
             this.buttonCreateOrder.TabIndex = 1;
@@ -158,7 +160,7 @@
             // 
             // buttonPayOrder
             // 
-            this.buttonPayOrder.Location = new System.Drawing.Point(898, 186);
+            this.buttonPayOrder.Location = new System.Drawing.Point(1010, 150);
             this.buttonPayOrder.Name = "buttonPayOrder";
             this.buttonPayOrder.Size = new System.Drawing.Size(140, 27);
             this.buttonPayOrder.TabIndex = 4;
@@ -168,7 +170,7 @@
             // 
             // buttonRef
             // 
-            this.buttonRef.Location = new System.Drawing.Point(898, 280);
+            this.buttonRef.Location = new System.Drawing.Point(1010, 263);
             this.buttonRef.Name = "buttonRef";
             this.buttonRef.Size = new System.Drawing.Size(140, 27);
             this.buttonRef.TabIndex = 5;
@@ -182,14 +184,21 @@
             this.dataGridView.Location = new System.Drawing.Point(10, 37);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowHeadersWidth = 51;
-            this.dataGridView.Size = new System.Drawing.Size(872, 287);
+            this.dataGridView.Size = new System.Drawing.Size(968, 287);
             this.dataGridView.TabIndex = 6;
+            // 
+            // бэкапToolStripMenuItem
+            // 
+            this.бэкапToolStripMenuItem.Name = "бэкапToolStripMenuItem";
+            this.бэкапToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.бэкапToolStripMenuItem.Text = "Бэкап";
+            this.бэкапToolStripMenuItem.Click += new System.EventHandler(this.бэкапToolStripMenuItem_Click);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1071, 335);
+            this.ClientSize = new System.Drawing.Size(1178, 334);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.buttonRef);
             this.Controls.Add(this.buttonPayOrder);
@@ -225,5 +234,6 @@
         private System.Windows.Forms.ToolStripMenuItem исполнителиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem запускРаботToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сообщенияToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem бэкапToolStripMenuItem;
     }
 }
